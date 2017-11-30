@@ -736,7 +736,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   armorRating: 0
-  debris: {fileID: 1297531746251834, guid: 2964cbb03ab0af148bea1e416c85b2b7, type: 2}
+  rigidbody: {fileID: 54864544923774380}
+  explosion: {fileID: 1297531746251834, guid: 2964cbb03ab0af148bea1e416c85b2b7, type: 2}
+  debris: {fileID: 1109166364608516, guid: 1c3ec396c91b9bb49a6f61fdeb153c28, type: 2}
   motorTorque: 5000
   target: {fileID: 0}
   rigidBody: {fileID: 0}

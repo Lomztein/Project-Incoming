@@ -5,7 +5,7 @@ using UnityEngine;
 public class MuzzleFlash : MonoBehaviour {
 
     public float shrinkSpeed = 0.2f;
-    private int shrinkIterations = 5;
+    public int shrinkIterations = 5;
 
     public void Start() {
         StartCoroutine (_Shrink ());
