@@ -17,4 +17,9 @@ public class Damage {
     public void DoDamage(IDamageable toDamage) {
         toDamage.Damage (this);
     }
+
+    public float CalculateDamagePostArmor(float armorRating) {
+        float relative = Mathf.Clamp01 (armorPenetration - armorRating);
+        return relative * damage;
+    }
 }

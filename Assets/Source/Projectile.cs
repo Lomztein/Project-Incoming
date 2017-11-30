@@ -9,10 +9,13 @@ public class Projectile : MonoBehaviour, IFireable {
 
     public int amount;
     public float speed;
-    public float damage;
+    public float mass;
+    public float armorPenetration;
     public float inaccuracy;
 
     public float range = 100;
+
+    public GameObject hitParticle;
 
     public void Fire(Transform muzzle, Weapon firingWeapon) {
         for (int i = 0; i < amount; i++) {
@@ -31,11 +34,15 @@ public class Projectile : MonoBehaviour, IFireable {
         }
     }
 
+    public float GetDamage() {
+        return speed * mass;
+    }
+
     private void FixedUpdate() {
         Ray nextRay = new Ray (transform.position, directionVector * Time.fixedDeltaTime);
         RaycastHit hit;
 
-        if (Physics.Raycast (nextRay, out hit, speed)) {
+        if (Physics.Raycast (nextRay, out hit, speed * Time.fixedDeltaTime)) {
             Hit (hit);
         }
 
@@ -43,8 +50,16 @@ public class Projectile : MonoBehaviour, IFireable {
     }
 
     public virtual void Hit(RaycastHit hit) {
-        IDamageable damageable = hit.collider.GetComponent<IDamageable> ();
+        IDamageable damageable = hit.collider.GetComponentInParent<IDamageable> ();
         if (damageable != null)
-            new Damage (damage, 0f, weapon).DoDamage (damageable);
+            new Damage (GetDamage (), armorPenetration, weapon).DoDamage (damageable);
+
+        Rigidbody body = hit.rigidbody;
+        if (body) {
+            body.AddForceAtPosition (directionVector / speed * GetDamage (), hit.point, ForceMode.Impulse);
+        }
+
+        Destroy (gameObject);
+        Destroy (Instantiate (hitParticle, hit.point, Quaternion.LookRotation (hit.normal, Vector3.up)), 5f);
     }
 }
