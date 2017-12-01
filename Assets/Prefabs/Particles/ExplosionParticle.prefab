@@ -53,7 +53,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4243219724379526}
   - component: {fileID: 33994564459452672}
-  - component: {fileID: 135755669051571132}
   - component: {fileID: 23824790737357010}
   - component: {fileID: 114028130848173708}
   - component: {fileID: 108157726299437740}
@@ -335,18 +334,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shrinkSpeed: 0.2
   shrinkIterations: 5
---- !u!135 &135755669051571132
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713418868572204}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198101930477424600
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -413,7 +400,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
+      scalar: 0.2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -966,7 +953,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 200
+      scalar: 500
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3668,7 +3655,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1846312925
+  randomSeed: 491765435
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -6935,14 +6922,14 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1272388376
+  randomSeed: -1199148788
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.15
+      scalar: 0.05
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6983,7 +6970,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 50
+      scalar: 150
       minScalar: 20
       maxCurve:
         serializedVersion: 2

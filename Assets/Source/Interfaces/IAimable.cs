@@ -10,6 +10,6 @@ public interface IAimable {
 
     void Aim(Vector3 position);
 
-    void Fire();
+    bool Fire();
 
 }

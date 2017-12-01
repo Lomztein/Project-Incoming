@@ -16,11 +16,13 @@ public class Projectile : MonoBehaviour, IFireable {
     public float range = 100;
 
     public GameObject hitParticle;
+    public LayerMask hittableLayer;
 
     public void Fire(Transform muzzle, Weapon firingWeapon) {
         for (int i = 0; i < amount; i++) {
             GameObject newBullet = Instantiate (gameObject, muzzle.position, Quaternion.identity);
             Projectile projectile = newBullet.GetComponent<Projectile> ();
+            projectile.hittableLayer = firingWeapon.hittableLayer;
 
             float rad = inaccuracy * Mathf.Deg2Rad;
 
@@ -42,7 +44,7 @@ public class Projectile : MonoBehaviour, IFireable {
         Ray nextRay = new Ray (transform.position, directionVector * Time.fixedDeltaTime);
         RaycastHit hit;
 
-        if (Physics.Raycast (nextRay, out hit, speed * Time.fixedDeltaTime)) {
+        if (Physics.Raycast (nextRay, out hit, speed * Time.fixedDeltaTime, hittableLayer)) {
             Hit (hit);
         }
 

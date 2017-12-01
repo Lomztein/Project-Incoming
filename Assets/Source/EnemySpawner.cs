@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour {
         GameObject newEnemy = Instantiate (enemy, transform.position + (Random.Range (-spawnXRange, spawnXRange) * transform.right), transform.rotation);
         Invoke ("Spawn", spawnDelay);
 
-        spawnDelay -= 0.1f;
+        spawnDelay -= 0.05f;
         if (spawnDelay < minSpawnDelay)
             spawnDelay = minSpawnDelay;
     }

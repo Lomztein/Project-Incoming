@@ -7,16 +7,17 @@ using UnityEngine.SceneManagement;
 public class BattlefieldGUI : MonoBehaviour {
 
     public Slider healthBar;
-    public DamageableTurret playerTurret;
+    public BaseHealth baseHealth;
     public GameObject lostMessage;
-	
-	// Update is called once per frame
-	void Update () {
-        healthBar.value = playerTurret.health / playerTurret.maxHealth;
-        if (playerTurret.health < 0 && !lostMessage.activeSelf) {
+    public Text creditsText;
+
+    void Update () {
+        healthBar.value = baseHealth.health / baseHealth.maxHealth;
+        if (baseHealth.health <= 0 && !lostMessage.activeSelf) {
             lostMessage.SetActive (true);
             Invoke ("Restart", 5f);
         }
+        creditsText.text = "CREDITS: <b>" + PlayerInput.GetCredits () + "</b>";
 	}
 
     void Restart() {

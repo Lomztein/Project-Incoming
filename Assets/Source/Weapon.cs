@@ -19,6 +19,8 @@ public class Weapon : MonoBehaviour {
     public int ammo = -1;
     public int maxAmmo = -1;
 
+    public LayerMask hittableLayer;
+
     private void Awake() {
         projectileFireable = projectile.GetComponent<IFireable> ();
         Invoke ("Rechamber", rechamberSpeed);

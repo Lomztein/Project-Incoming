@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyJeep : Enemy, IAimable {
 
+    public float maxSpeed;
     public float motorTorque;
-    public Transform target;
     public Rigidbody rigidBody;
 
     public Axel frontWheels;
@@ -17,39 +17,50 @@ public class EnemyJeep : Enemy, IAimable {
             return _targetPosition;
         }
     }
+
     private Vector3 _targetPosition;
 
     public void Aim(Vector3 position) {
         _targetPosition = position;
-        _turret.Aim (position);
     }
 
     void Awake() {
-        target = GameObject.FindGameObjectWithTag ("Player").transform; // Todo, replace this you bafoon.
         _turret = turret.GetComponent<IAimable> ();
     }
 
     private void FixedUpdate() {
+        Aim (transform.position + Quaternion.Euler (0f, moveDirection, 0f) * Vector3.forward);
+
+        Vector3 between = (TargetPosition - transform.position).normalized;
+        between.y = 0;
+        float angle = Trigonometry.AngleBetween (new Vector3 (transform.forward.x, 0, transform.forward.z), between);
+        frontWheels.SteerTowards (angle);
+
         if (target) {
-            Aim (target.position);
-
-            Vector3 between = (TargetPosition - transform.position).normalized;
-            between.y = 0;
-            float angle = Trigonometry.AngleBetween (new Vector3 (transform.forward.x, 0, transform.forward.z), between);
-
-            frontWheels.SteerTowards (angle);
+            _turret.Aim (target.position);
 
             if (Vector3.Distance (transform.position, target.position) < range) {
                 Fire ();
-                frontWheels.Accelerate (0f);
+                frontWheels.SetBrakeTorque (motorTorque * 2000f);
+                frontWheels.SetTorque (0f);
             } else {
-                frontWheels.Accelerate (motorTorque);
+                target = null;
             }
+        } else {
+            if (rigidbody.velocity.sqrMagnitude < (Mathf.Pow (maxSpeed, 2))) {
+                frontWheels.SetTorque (motorTorque);
+                frontWheels.SetBrakeTorque (0f);
+            } else {
+                frontWheels.SetTorque (0);
+            }
+
+            target = targetFinder.FindTarget (new Ray (transform.position, transform.forward * range), width, range, targetLayer);
+            Debug.DrawRay (transform.position, transform.forward * range, Color.red);
         }
     }
 
-    public void Fire() {
-        _turret.Fire ();
+    public bool Fire() {
+        return _turret.Fire ();
     }
 
     [System.Serializable]
@@ -65,9 +76,14 @@ public class EnemyJeep : Enemy, IAimable {
             leftSide.steerAngle = angle;
         }
 
-        public void Accelerate(float torque) {
+        public void SetTorque(float torque) {
             rightSide.motorTorque = torque;
             leftSide.motorTorque = torque;
+        }
+
+        public void SetBrakeTorque(float brakeTorque) {
+            rightSide.brakeTorque = brakeTorque;
+            leftSide.brakeTorque = brakeTorque;
         }
     }
 }

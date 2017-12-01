@@ -40,11 +40,16 @@ public class Turret : MonoBehaviour, IAimable {
         _targetPosition = position;
     }
 
-    public void Fire() {
-        if (weapon.Fire () && animator) {
-            animator.SetBool ("Firing", true);
-            Invoke ("StopFire", 0.1f);
+    public bool Fire() {
+        if (weapon.Fire ()) {
+
+            if (animator) {
+                animator.SetBool ("Firing", true);
+                Invoke ("StopFire", 0.1f);
+            }
+            return true;
         }
+        return false;
     }
         
     private void StopFire() {
