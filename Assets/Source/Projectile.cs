@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour, IFireable {
 
         Rigidbody body = hit.rigidbody;
         if (body) {
-            body.AddForceAtPosition (directionVector / speed * GetDamage (), hit.point, ForceMode.Impulse);
+            body.AddForceAtPosition (transform.forward * GetDamage (), hit.point, ForceMode.Impulse);
         }
 
         Destroy (gameObject);

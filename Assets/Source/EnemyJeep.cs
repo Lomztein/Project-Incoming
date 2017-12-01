@@ -9,6 +9,8 @@ public class EnemyJeep : Enemy, IAimable {
     public Rigidbody rigidBody;
 
     public Axel frontWheels;
+    public GameObject turret;
+    private IAimable _turret;
 
     public Vector3 TargetPosition {
         get {
@@ -19,10 +21,12 @@ public class EnemyJeep : Enemy, IAimable {
 
     public void Aim(Vector3 position) {
         _targetPosition = position;
+        _turret.Aim (position);
     }
 
     void Awake() {
         target = GameObject.FindGameObjectWithTag ("Player").transform; // Todo, replace this you bafoon.
+        _turret = turret.GetComponent<IAimable> ();
     }
 
     private void FixedUpdate() {
@@ -33,13 +37,19 @@ public class EnemyJeep : Enemy, IAimable {
             between.y = 0;
             float angle = Trigonometry.AngleBetween (new Vector3 (transform.forward.x, 0, transform.forward.z), between);
 
-            frontWheels.SteerTowards (angle); 
-            frontWheels.Accelerate (motorTorque);
+            frontWheels.SteerTowards (angle);
+
+            if (Vector3.Distance (transform.position, target.position) < range) {
+                Fire ();
+                frontWheels.Accelerate (0f);
+            } else {
+                frontWheels.Accelerate (motorTorque);
+            }
         }
     }
 
     public void Fire() {
-        throw new System.NotImplementedException ();
+        _turret.Fire ();
     }
 
     [System.Serializable]

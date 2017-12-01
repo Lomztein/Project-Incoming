@@ -19,7 +19,7 @@ public class Damage {
     }
 
     public float CalculateDamagePostArmor(float armorRating) {
-        float relative = Mathf.Clamp01 (armorPenetration - armorRating);
+        float relative = Mathf.Clamp01 (1 - (armorRating - armorPenetration));
         return relative * damage;
     }
 }

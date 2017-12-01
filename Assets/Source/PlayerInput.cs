@@ -7,10 +7,14 @@ public class PlayerInput : MonoBehaviour {
     public static PlayerInput input;
 
     public static Vector3 mouseWorldPosition;
+    public GameObject [ ] playerTurrets = new GameObject [0];
     private List<IAimable> controlledAimables = new List<IAimable> ();
 
     private void Awake() {
         input = this;
+        foreach (GameObject obj in playerTurrets) {
+            controlledAimables.Add (obj.GetComponent<IAimable> ());
+        }
     }
 
     public static void AddControlledAimable(IAimable aimable) {
