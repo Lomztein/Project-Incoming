@@ -20,6 +20,11 @@ public class Emplacement : MonoBehaviour {
         allEmplacements.Add (this);
     }
 
+    private void OnLevelWasLoaded(int level) {
+        allEmplacements = new List<Emplacement> ();
+        mainLink = new LinkedFire ();
+    }
+
     private void Start() {
         purchaseButton.transform.position = Camera.main.WorldToScreenPoint (transform.position);
     }
@@ -59,6 +64,7 @@ public class Emplacement : MonoBehaviour {
 
     public class LinkedFire {
 
+        // TODO, possibly change linked objects to IAimables instead.
         public List<Emplacement> emplacements = new List<Emplacement> ();
         public float linkedFireRate = 0;
 

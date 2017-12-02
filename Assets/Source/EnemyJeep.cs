@@ -28,6 +28,10 @@ public class EnemyJeep : Enemy, IAimable {
         _turret = turret.GetComponent<IAimable> ();
     }
 
+    public void SetIdle() {
+        _turret.SetIdle ();
+    }
+
     private void FixedUpdate() {
         Aim (transform.position + Quaternion.Euler (0f, moveDirection, 0f) * Vector3.forward);
 
@@ -54,6 +58,7 @@ public class EnemyJeep : Enemy, IAimable {
                 frontWheels.SetTorque (0);
             }
 
+            _turret.SetIdle ();
             target = targetFinder.FindTarget (new Ray (transform.position, transform.forward * range), width, range, targetLayer);
             Debug.DrawRay (transform.position, transform.forward * range, Color.red);
         }

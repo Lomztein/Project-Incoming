@@ -12,6 +12,8 @@ public class Turret : MonoBehaviour, IAimable {
     public Weapon weapon;
     public Animator animator;
 
+    public bool isIdle = true;
+
     public Vector3 TargetPosition {
         get {
             return _targetPosition;
@@ -20,24 +22,32 @@ public class Turret : MonoBehaviour, IAimable {
 
     private Vector3 _targetPosition;
 
-    private void FixedUpdate() {
-        // Theres some heavy mathematics going on here, stuff I *technically* know, but am not particularily good at.   
-        Vector3 transformedPos = yawTransform.InverseTransformPoint (TargetPosition);
+    public virtual void FixedUpdate() {
+        // Theres some heavy mathematics going on here, stuff I *technically* know, but am not particularily good at.
+        if (!isIdle) {
+            Vector3 transformedPos = yawTransform.InverseTransformPoint (TargetPosition);
 
-        Quaternion rot = Quaternion.LookRotation (transformedPos);
+            Quaternion rot = Quaternion.LookRotation (transformedPos);
 
-        yawTransform.localRotation = Quaternion.RotateTowards (yawTransform.localRotation, Quaternion.Euler (yawTransform.localRotation.eulerAngles.x, yawTransform.localRotation.eulerAngles.y + rot.eulerAngles.y, yawTransform.localRotation.eulerAngles.z), rotateSpeed * Time.fixedDeltaTime);
+            yawTransform.localRotation = Quaternion.RotateTowards (yawTransform.localRotation, Quaternion.Euler (yawTransform.localRotation.eulerAngles.x, yawTransform.localRotation.eulerAngles.y + rot.eulerAngles.y, yawTransform.localRotation.eulerAngles.z), rotateSpeed * Time.fixedDeltaTime);
 
-        if (pitchTransform) {
-            transformedPos = pitchTransform.InverseTransformPoint (TargetPosition);
-            rot = Quaternion.LookRotation (transformedPos, Vector3.right);
+            if (pitchTransform) {
+                transformedPos = pitchTransform.InverseTransformPoint (TargetPosition);
+                rot = Quaternion.LookRotation (transformedPos, Vector3.right);
 
-            pitchTransform.localRotation = Quaternion.RotateTowards (pitchTransform.localRotation, Quaternion.Euler (pitchTransform.localRotation.eulerAngles.x + rot.eulerAngles.x, pitchTransform.localRotation.eulerAngles.y, pitchTransform.localRotation.eulerAngles.z), rotateSpeed * Time.fixedDeltaTime);
+                pitchTransform.localRotation = Quaternion.RotateTowards (pitchTransform.localRotation, Quaternion.Euler (pitchTransform.localRotation.eulerAngles.x + rot.eulerAngles.x, pitchTransform.localRotation.eulerAngles.y, pitchTransform.localRotation.eulerAngles.z), rotateSpeed * Time.fixedDeltaTime);
+                //pitchTransform.localRotation = Quaternion.Euler (Mathf.Clamp (pitchTransform.localRotation.eulerAngles.x, -85f, 85f), pitchTransform.localRotation.y, pitchTransform.localRotation.z);
+            }
         }
     }
 
     public void Aim(Vector3 position) {
         _targetPosition = position;
+        isIdle = false;
+    }
+
+    public void SetIdle() {
+        isIdle = true;
     }
 
     public bool Fire() {

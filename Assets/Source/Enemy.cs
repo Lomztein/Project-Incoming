@@ -23,7 +23,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable {
 
     public void Damage(Damage damage) {
         health -= damage.CalculateDamagePostArmor (armorRating);
-        if (health < 0f)
+        if (health <= 0f)
             Explode ();
     }
 

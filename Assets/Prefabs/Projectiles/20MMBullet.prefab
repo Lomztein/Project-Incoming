@@ -9,17 +9,33 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1608416371570562}
+  m_RootGameObject: {fileID: 1491645643374216}
   m_IsPrefabParent: 1
---- !u!1 &1407066949510066
+--- !u!1 &1491645643374216
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4144657851636588}
-  - component: {fileID: 120545790234069774}
+  - component: {fileID: 4329534720238040}
+  - component: {fileID: 114808102211779164}
+  m_Layer: 0
+  m_Name: 20MMBullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1987386786319346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4050742069326022}
+  - component: {fileID: 120981292407877286}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -27,55 +43,39 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1608416371570562
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4180157518092566}
-  - component: {fileID: 114055294081519314}
-  m_Layer: 0
-  m_Name: BasicMGBullet
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4144657851636588
+--- !u!4 &4050742069326022
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1407066949510066}
+  m_GameObject: {fileID: 1987386786319346}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4180157518092566}
+  m_Father: {fileID: 4329534720238040}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4180157518092566
+--- !u!4 &4329534720238040
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608416371570562}
+  m_GameObject: {fileID: 1491645643374216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.033, y: 1.144, z: 0.027}
+  m_LocalPosition: {x: 0, y: 0.665, z: 2.753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4144657851636588}
+  - {fileID: 4050742069326022}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114055294081519314
+--- !u!114 &114808102211779164
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608416371570562}
+  m_GameObject: {fileID: 1491645643374216}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cef30f2d0e320547b959be3c4a13a8e, type: 3}
@@ -84,22 +84,22 @@ MonoBehaviour:
   directionVector: {x: 0, y: 0, z: 0}
   weapon: {fileID: 0}
   amount: 1
-  speed: 350
-  mass: 0.2
-  armorPenetration: 0
-  inaccuracy: 2
+  speed: 150
+  mass: 3
+  armorPenetration: 0.3
+  inaccuracy: 1
   range: 100
-  hitParticle: {fileID: 1868096527458948, guid: 48e1c57db604d8c43b888b5e933c341e,
+  hitParticle: {fileID: 1488440559610420, guid: ef4eccd6c3f270745ac303cdde57363f,
     type: 2}
   hittableLayer:
     serializedVersion: 2
     m_Bits: 0
---- !u!120 &120545790234069774
+--- !u!120 &120981292407877286
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1407066949510066}
+  m_GameObject: {fileID: 1987386786319346}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -128,10 +128,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0.8}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.05
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:

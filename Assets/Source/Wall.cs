@@ -2,19 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour, IDamageable {
+public class Wall : MonoBehaviour {
 
-    public float health;
-    public float maxHealth;
-    public float armor;
+    public static Wall wall;
 
-    public void Damage(Damage damage) {
-        health -= damage.CalculateDamagePostArmor (armor);
+    public GameObject wallPrefab;
+    public List<WallPiece> pieces;
 
-        if (health < 0f) {
-            Destroy (gameObject);
-        }
+    public float segmentLength;
+    public int segmentAmount;
 
-        transform.position += Vector3.down * (damage.damage / maxHealth);
+    private void Awake() {
+        wall = this;
     }
+
+    private void Start() {
+        BuildWall ();
+    }
+
+    public void BuildWall() {
+        Vector3 direction = transform.right;
+        for (int i = -segmentAmount; i <= segmentAmount; i++) {
+            GameObject newSegment = Instantiate (wallPrefab, transform.position + direction * segmentLength * i, transform.rotation);
+            newSegment.transform.SetParent (transform);
+
+            WallPiece piece = newSegment.GetComponent<WallPiece> ();
+            pieces.Add (piece);
+        }
+    }
+
+    public static float GetTotalHealth() {
+        float total = 0f;
+        wall.pieces.ForEach (x => total += x.health);
+        return total;
+    }
+
 }
