@@ -85,7 +85,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   amount: 1
   speed: 150
-  mass: 3
+  mass: 4
   armorPenetration: 0.3
   inaccuracy: 1
   range: 100
@@ -107,7 +107,7 @@ LineRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: e307503160914b9449c87137b7aed3a0, type: 2}
+  - {fileID: 2100000, guid: bd269ae87b948224ba655bf9868f6be0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

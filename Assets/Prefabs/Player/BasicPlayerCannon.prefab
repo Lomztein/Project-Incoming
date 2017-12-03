@@ -482,6 +482,8 @@ MonoBehaviour:
   rotateSpeed: 60
   weapon: {fileID: 114580999064319090}
   animator: {fileID: 95967530595572050}
+  isIdle: 1
+  ignoreDirection: 1
 --- !u!114 &114580999064319090
 MonoBehaviour:
   m_ObjectHideFlags: 1

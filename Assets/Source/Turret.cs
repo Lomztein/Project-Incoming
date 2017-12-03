@@ -13,6 +13,7 @@ public class Turret : MonoBehaviour, IAimable {
     public Animator animator;
 
     public bool isIdle = true;
+    public bool ignoreDirection;
 
     public Vector3 TargetPosition {
         get {
@@ -36,7 +37,6 @@ public class Turret : MonoBehaviour, IAimable {
                 rot = Quaternion.LookRotation (transformedPos, Vector3.right);
 
                 pitchTransform.localRotation = Quaternion.RotateTowards (pitchTransform.localRotation, Quaternion.Euler (pitchTransform.localRotation.eulerAngles.x + rot.eulerAngles.x, pitchTransform.localRotation.eulerAngles.y, pitchTransform.localRotation.eulerAngles.z), rotateSpeed * Time.fixedDeltaTime);
-                //pitchTransform.localRotation = Quaternion.Euler (Mathf.Clamp (pitchTransform.localRotation.eulerAngles.x, -85f, 85f), pitchTransform.localRotation.y, pitchTransform.localRotation.z);
             }
         }
     }
@@ -51,13 +51,17 @@ public class Turret : MonoBehaviour, IAimable {
     }
 
     public bool Fire() {
-        if (weapon.Fire ()) {
+        float deltaAngle = Vector3.Angle (TargetPosition - weapon.muzzle.position, weapon.muzzle.forward);
 
-            if (animator) {
-                animator.SetBool ("Firing", true);
-                Invoke ("StopFire", 0.1f);
+        if (deltaAngle < 2f || ignoreDirection) {
+            if (weapon.Fire ()) {
+
+                if (animator) {
+                    animator.SetBool ("Firing", true);
+                    Invoke ("StopFire", 0.1f);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

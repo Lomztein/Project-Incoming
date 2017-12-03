@@ -176,7 +176,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1814366140559076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 4.48}
+  m_LocalPosition: {x: 8.29933, y: 0, z: 4.0754137}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4847590255191170}
@@ -478,13 +478,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1491645643374216, guid: 563edc37e29b7ca41ad529c42b946bfa, type: 2}
-  fireParticle: {fileID: 1795139306765324, guid: 75b3eeed446c95f44965442f52665c2b,
+  fireParticle: {fileID: 1795995045626730, guid: a58e4ae9ea532d74ca2531b22660ba1a,
     type: 2}
   fireSound: {fileID: 8300000, guid: 31f2e2537f0e1434ba4e9118cd1941fa, type: 3}
   audioSource: {fileID: 82195543176549954}
   muzzle: {fileID: 4286841166131744}
   rechamberSpeed: 0.2
-  reloadSpeed: 2
+  reloadSpeed: 1.5
   ammo: 8
   maxAmmo: 8
   hittableLayer:
@@ -507,6 +507,7 @@ MonoBehaviour:
   weapon: {fileID: 114031331102104234}
   animator: {fileID: 95508166381526944}
   isIdle: 1
+  ignoreDirection: 0
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2

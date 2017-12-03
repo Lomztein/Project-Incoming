@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour {
     public float minSpawnDelay = 0.5f;
 
     public float spawnXRange = 20;
+    public float spawnDelayLoweringTime = 30f;
 
 	// Use this for initialization
 	void Start () {
@@ -18,8 +19,10 @@ public class EnemySpawner : MonoBehaviour {
     void Spawn() {
         GameObject newEnemy = Instantiate (enemy, transform.position + (Random.Range (-spawnXRange, spawnXRange) * transform.right), transform.rotation);
         Invoke ("Spawn", spawnDelay);
+    }
 
-        spawnDelay -= 0.05f;
+    private void FixedUpdate() {
+        spawnDelay -= Time.fixedDeltaTime / spawnDelayLoweringTime;
         if (spawnDelay < minSpawnDelay)
             spawnDelay = minSpawnDelay;
     }
