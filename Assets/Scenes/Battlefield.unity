@@ -447,7 +447,9 @@ MonoBehaviour:
   spawnDelay: 4
   minSpawnDelay: 0.8
   spawnXRange: 15
-  spawnDelayLoweringTime: 80
+  spawnDelayLowering: 0.5
+  spawnPerWave: 5
+  spawnAmount: 0
 --- !u!4 &441507842
 Transform:
   m_ObjectHideFlags: 0
@@ -627,6 +629,12 @@ Prefab:
       propertyPath: purchaseButton
       value: 
       objectReference: {fileID: 1855516076}
+    - target: {fileID: 114543575433166766, guid: 6803779f7d1ba8b439f92bee9d60db24,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 1534527696857002, guid: 366006f2a15cdf84688fe9da10ec3459,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6803779f7d1ba8b439f92bee9d60db24, type: 2}
   m_IsPrefabParent: 0
@@ -944,6 +952,12 @@ Prefab:
       propertyPath: purchaseButton
       value: 
       objectReference: {fileID: 478735780}
+    - target: {fileID: 114543575433166766, guid: 6803779f7d1ba8b439f92bee9d60db24,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 1534527696857002, guid: 366006f2a15cdf84688fe9da10ec3459,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6803779f7d1ba8b439f92bee9d60db24, type: 2}
   m_IsPrefabParent: 0
@@ -1053,7 +1067,11 @@ MonoBehaviour:
   - {fileID: 1697255141}
   - {fileID: 1027494609}
   - {fileID: 2005663785}
-  credits: 250
+  aimbotLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  aimbotEnabled: 0
+  credits: 10000
 --- !u!114 &1339533397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,36 +1080,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1339533390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fceaeb339b971b429c4cc600acabd13, type: 3}
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweakMode: 0
-  screenBlendMode: 1
-  hdr: 0
-  sepBlurSpread: 2.5
-  quality: 1
-  bloomIntensity: 0.5
-  bloomThreshold: 1
-  bloomThresholdColor: {r: 1, g: 1, b: 1, a: 1}
-  bloomBlurIterations: 2
-  hollywoodFlareBlurIterations: 2
-  flareRotation: 0
-  lensflareMode: 1
-  hollyStretchWidth: 2.5
-  lensflareIntensity: 0
-  lensflareThreshold: 0.3
-  lensFlareSaturation: 0.75
-  flareColorA: {r: 0.4, g: 0.4, b: 0.8, a: 0.75}
-  flareColorB: {r: 0.4, g: 0.8, b: 0.8, a: 0.75}
-  flareColorC: {r: 0.8, g: 0.4, b: 0.8, a: 0.75}
-  flareColorD: {r: 0.8, g: 0.4, b: 0, a: 0.75}
-  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
-    type: 3}
-  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 3}
-  screenBlendShader: {fileID: 4800000, guid: 7856cbff0a0ca45c787d5431eb805bb0, type: 3}
-  blurAndFlaresShader: {fileID: 4800000, guid: be6e39cf196f146d5be72fbefb18ed75, type: 3}
-  brightPassFilterShader: {fileID: 4800000, guid: 0aeaa4cb29f5d4e9c8455f04c8575c8c,
-    type: 3}
+  threshold: 1
+  intensity: 1
+  blurSize: 0.25
+  blurIterations: 2
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!1 &1534081892
 GameObject:
   m_ObjectHideFlags: 0
@@ -2227,6 +2224,12 @@ Prefab:
       propertyPath: purchaseButton
       value: 
       objectReference: {fileID: 1897565471}
+    - target: {fileID: 114543575433166766, guid: 6803779f7d1ba8b439f92bee9d60db24,
+        type: 2}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 1534527696857002, guid: 366006f2a15cdf84688fe9da10ec3459,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6803779f7d1ba8b439f92bee9d60db24, type: 2}
   m_IsPrefabParent: 0

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public interface IPlaceable {
 
-    void ToPosition(Vector3 position, Quaternion rotation);
+    bool ToPosition(Vector3 position, Quaternion rotation);
 
-    void ToTransform(Transform transform);
+    bool ToTransform(Transform transform);
 
-    void Place();
+    bool Place();
+
+    bool PickUp();
 
 }

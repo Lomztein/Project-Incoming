@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour, IAimable {
+public class Turret : MonoBehaviour, IAimable, ILinkable {
 
     public Transform yawTransform;
     public Transform pitchTransform;
@@ -16,9 +16,17 @@ public class Turret : MonoBehaviour, IAimable {
     public bool ignoreDirection;
 
     public Vector3 TargetPosition {
-        get {
-            return _targetPosition;
-        }
+        get { return _targetPosition; }
+    }
+
+    private LinkedFire _linkedFire;
+    public LinkedFire Link {
+        get { return _linkedFire;  }
+        set { _linkedFire = value; }
+    }
+
+    public IWeapon Weapon {
+        get { return weapon; }
     }
 
     private Vector3 _targetPosition;
@@ -51,22 +59,37 @@ public class Turret : MonoBehaviour, IAimable {
     }
 
     public bool Fire() {
+        if (_linkedFire != null) {
+            return _linkedFire.Fire ();
+        }
+
         float deltaAngle = Vector3.Angle (TargetPosition - weapon.muzzle.position, weapon.muzzle.forward);
 
         if (deltaAngle < 2f || ignoreDirection) {
             if (weapon.Fire ()) {
-
-                if (animator) {
-                    animator.SetBool ("Firing", true);
-                    Invoke ("StopFire", 0.1f);
-                }
+                OnFire ();
                 return true;
             }
         }
         return false;
     }
+
+    private void PlayFireAnimation () {
+        if (animator) {
+            animator.SetBool ("Firing", true);
+            Invoke ("StopFire", 0.1f);
+        }
+    }
         
     private void StopFire() {
         animator.SetBool ("Firing", false);
+    }
+
+    public float GetFirerate() {
+        return Weapon.GetFirerate ();
+    }
+
+    public void OnFire() {
+        PlayFireAnimation ();
     }
 }

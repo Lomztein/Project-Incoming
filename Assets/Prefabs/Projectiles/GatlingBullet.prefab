@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4180157518092566}
   - component: {fileID: 114055294081519314}
   m_Layer: 0
-  m_Name: BasicMGBullet
+  m_Name: GatlingBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   amount: 1
   speed: 350
-  mass: 1.2
+  mass: 0.8
   armorPenetration: 0
   inaccuracy: 2
   range: 100
@@ -128,7 +128,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 2.5}
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.05

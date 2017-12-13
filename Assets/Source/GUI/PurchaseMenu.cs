@@ -9,6 +9,8 @@ public class PurchaseMenu : MonoBehaviour {
     public IPlaceable placeableInHand;
     public GameObject hoveringObject;
 
+    public List<DefensiveTurret> defensiveTurrets;
+
     // Use this for initialization
     private void Awake() {
         menu = this;
@@ -25,12 +27,19 @@ public class PurchaseMenu : MonoBehaviour {
 	}
 
     public static void PickUp(IPlaceable placeable) {
-        if (menu.placeableInHand == null)
+        if (menu.placeableInHand == null) {
             menu.placeableInHand = placeable;
+            placeable.PickUp ();
+        }
     }
 
     public static void Place() {
-        menu.placeableInHand.Place ();
-        menu.placeableInHand = null;
+        if (menu.placeableInHand.Place ()) {
+            if (menu.placeableInHand is DefensiveTurret) {
+                menu.defensiveTurrets.Add (menu.placeableInHand as DefensiveTurret);
+                LinkedFire.Link (menu.defensiveTurrets.ToArray ());
+            }
+            menu.placeableInHand = null;
+        }
     }
 }

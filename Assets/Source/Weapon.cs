@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : MonoBehaviour, IWeapon {
 
     public GameObject projectile;
     private IFireable projectileFireable;
@@ -63,5 +63,17 @@ public class Weapon : MonoBehaviour {
 
     private void Reload() {
         ammo = maxAmmo;
+    }
+
+    public float GetDamage() {
+        return projectile.GetComponent<Projectile> ().GetDamage ();
+    }
+
+    public float GetDPS() {
+        return projectile.GetComponent<Projectile> ().GetDamage () / rechamberSpeed;
+    }
+
+    public float GetFirerate() {
+        return rechamberSpeed;
     }
 }

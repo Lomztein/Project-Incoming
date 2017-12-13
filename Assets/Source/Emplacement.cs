@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 using UnityEngine.UI;
 
-public class Emplacement : MonoBehaviour {
+public class Emplacement : MonoBehaviour, ILinkable {
 
     public GameObject turretPrefab;
     public Turret turret;
@@ -12,9 +13,20 @@ public class Emplacement : MonoBehaviour {
     public static List<Emplacement> allEmplacements = new List<Emplacement> ();
 
     public Button purchaseButton;
-    public LinkedFire link;
 
-    public static LinkedFire mainLink = new LinkedFire ();
+    public LinkedFire Link {
+        get {
+            return turret.Link;
+        }
+
+        set {
+            turret.Link = value;
+        }
+    }
+
+    public IWeapon Weapon {
+        get { return turret.Weapon; }
+    } 
 
     private void Awake() {
         allEmplacements.Add (this);
@@ -22,7 +34,6 @@ public class Emplacement : MonoBehaviour {
 
     private void OnLevelWasLoaded(int level) {
         allEmplacements = new List<Emplacement> ();
-        mainLink = new LinkedFire ();
     }
 
     private void Start() {
@@ -30,11 +41,7 @@ public class Emplacement : MonoBehaviour {
     }
 
     public void Fire() {
-        if (link == null) {
-            turret.Fire ();
-        } else {
-            link.Fire ();
-        }
+        turret.Fire ();
     }
 
     private void Update() {
@@ -55,40 +62,20 @@ public class Emplacement : MonoBehaviour {
         GameObject newTurret = Instantiate (turretPrefab, transform.position, transform.rotation);
         turret = newTurret.GetComponent<Turret> ();
         Destroy (purchaseButton.gameObject);
-        Link (mainLink);
+        LinkedFire.Link (allEmplacements.Where (x => x.turret).ToArray ());
     }
 
-    public void Link(LinkedFire newLink) {
-        newLink.AddEmplacement (this);
+    public void ChangeTurret(GameObject newTurret) {
+        turretPrefab = newTurret;
+        Destroy (turret.gameObject);
+        BuildTurret ();
+     }
+
+    public float GetFirerate() {
+        return turret.GetFirerate ();
     }
 
-    public class LinkedFire {
-
-        // TODO, possibly change linked objects to IAimables instead.
-        public List<Emplacement> emplacements = new List<Emplacement> ();
-        public float linkedFireRate = 0;
-
-        private int linkIndex = 0;
-        private float readyTime = 0;
-
-        public void AddEmplacement(Emplacement emplacement) {
-            bool isSame = emplacements.Count == 0 || emplacements.TrueForAll (x => x.turretPrefab == emplacement.turretPrefab);
-            if (isSame) {
-                emplacement.link = this;
-                emplacements.Add (emplacement);
-                linkedFireRate = emplacement.turret.weapon.rechamberSpeed / emplacements.Count;
-            }
-        }
-
-        public void Fire() {
-            if (Time.time > readyTime) {
-                if (emplacements [ linkIndex ].turret.Fire ()) {
-                    readyTime = Time.time + linkedFireRate;
-
-                    linkIndex++;
-                    linkIndex = linkIndex % emplacements.Count;
-                }
-            }
-        }
+    public void OnFire () {
+        turret.OnFire ();
     }
 }

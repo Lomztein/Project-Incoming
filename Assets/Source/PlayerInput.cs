@@ -9,6 +9,11 @@ public class PlayerInput : MonoBehaviour {
     public static Vector3 mouseWorldPosition;
     public Emplacement[] emplacements;
 
+    private TargetFinder aimbot = new TargetFinder ();
+    private Transform aimbotTarget;
+    public LayerMask aimbotLayer;
+    public bool aimbotEnabled;
+
     public long credits = 500;
 
     private void Awake() {
@@ -39,10 +44,17 @@ public class PlayerInput : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
-        RaycastHit hit;
-        if (Map.gameMap.worldPlaneCollider.Raycast (mouseRay, out hit, Mathf.Infinity)) {
-            mouseWorldPosition = hit.point;
+        if (aimbotEnabled) {
+            if (!aimbotTarget) {
+                aimbotTarget = aimbot.FindTarget (Vector3.zero, 50, aimbotLayer);
+            } else
+                mouseWorldPosition = aimbotTarget.position;
+        } else {
+            Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+            RaycastHit hit;
+            if (Map.gameMap.worldPlaneCollider.Raycast (mouseRay, out hit, Mathf.Infinity)) {
+                mouseWorldPosition = hit.point;
+            }
         }
-	}
+    }
 }

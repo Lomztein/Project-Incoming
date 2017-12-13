@@ -10,16 +10,24 @@ public class DefensiveTurret : Turret, IPlaceable {
     public LayerMask targetLayerMask;
     public float range;
 
-        public void Place() {
-        enabled = true;
+    public bool PickUp() {
+        enabled = false;
+        return true;
     }
 
-    public void ToPosition(Vector3 position, Quaternion rotation) {
+    public bool Place() {
+        enabled = true;
+        return true;
+    }
+
+    public bool ToPosition(Vector3 position, Quaternion rotation) {
         transform.position = position;
         transform.rotation = rotation;
+        return true;
     }
 
-    public void ToTransform(Transform transform) {
+    public bool ToTransform(Transform transform) {
+        return false;
     }
 
     // Update is called once per frame
