@@ -26,6 +26,7 @@ public class Emplacement : MonoBehaviour, ILinkable {
 
     public IWeapon Weapon {
         get { return turret.Weapon; }
+        set { turret.Weapon = value; }
     } 
 
     private void Awake() {

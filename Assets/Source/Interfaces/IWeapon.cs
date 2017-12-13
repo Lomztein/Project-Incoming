@@ -1,4 +1,10 @@
-﻿public interface IWeapon {
+﻿using UnityEngine;
+
+public interface IWeapon {
+
+    Transform Muzzle {
+        get;
+    }
 
     bool Fire();
 

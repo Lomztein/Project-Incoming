@@ -18,8 +18,12 @@ public class Damage {
         toDamage.Damage (this);
     }
 
-    public float CalculateDamagePostArmor(float armorRating) {
+    public static float CalculateDamagePostArmor (float damage, float armorPenetration, float armorRating) {
         float relative = Mathf.Clamp01 (1 - (armorRating - armorPenetration));
         return relative * damage;
+    }
+
+    public float CalculateDamagePostArmor(float armorRating) {
+        return CalculateDamagePostArmor (damage, armorPenetration, armorRating);
     }
 }

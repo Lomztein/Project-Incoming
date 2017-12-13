@@ -7,6 +7,7 @@
 
     IWeapon Weapon {
         get;
+        set;
     }
 
     void OnFire();

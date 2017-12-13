@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IDamageable {
+public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
 
     public float health;
     public float armorRating;
@@ -21,7 +21,18 @@ public abstract class Enemy : MonoBehaviour, IDamageable {
     public float range = 10f;
     public float width = 1f;
 
-    public void Damage(Damage damage) {
+    void Start () {
+        Debug.Log (CompareWith (Emplacement.allEmplacements[0].turret.Weapon as Weapon));
+    }
+
+    public string CompareWith(Weapon other) {
+        Projectile proj = other.projectile.GetComponent<Projectile> ();
+        float damage = Damage.CalculateDamagePostArmor (proj.GetDamage (), proj.armorPenetration, armorRating);
+        float ttk = health / damage / other.GetFirerate ();
+        return "Time to kill: " + ttk;
+    }
+
+    void IDamageable.Damage(Damage damage) {
         health -= damage.CalculateDamagePostArmor (armorRating);
         if (health <= 0f)
             Explode ();

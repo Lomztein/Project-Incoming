@@ -9,7 +9,8 @@ public class Turret : MonoBehaviour, IAimable, ILinkable {
 
     public float rotateSpeed;
 
-    public Weapon weapon;
+    public GameObject weapon;
+    private IWeapon _weapon;
     public Animator animator;
 
     public bool isIdle = true;
@@ -26,10 +27,15 @@ public class Turret : MonoBehaviour, IAimable, ILinkable {
     }
 
     public IWeapon Weapon {
-        get { return weapon; }
+        get { return _weapon; }
+        set { _weapon = value; }
     }
 
     private Vector3 _targetPosition;
+
+    private void Awake() {
+        Weapon = weapon.GetComponent<IWeapon> ();
+    }
 
     public virtual void FixedUpdate() {
         // Theres some heavy mathematics going on here, stuff I *technically* know, but am not particularily good at.
@@ -63,10 +69,10 @@ public class Turret : MonoBehaviour, IAimable, ILinkable {
             return _linkedFire.Fire ();
         }
 
-        float deltaAngle = Vector3.Angle (TargetPosition - weapon.muzzle.position, weapon.muzzle.forward);
+        float deltaAngle = Vector3.Angle (TargetPosition - Weapon.Muzzle.position, Weapon.Muzzle.forward);
 
         if (deltaAngle < 2f || ignoreDirection) {
-            if (weapon.Fire ()) {
+            if (Weapon.Fire ()) {
                 OnFire ();
                 return true;
             }

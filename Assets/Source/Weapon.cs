@@ -21,6 +21,12 @@ public class Weapon : MonoBehaviour, IWeapon {
 
     public LayerMask hittableLayer;
 
+    public Transform Muzzle {
+        get {
+            return muzzle;
+        }
+    }
+
     private void Awake() {
         projectileFireable = projectile.GetComponent<IFireable> ();
         Invoke ("Rechamber", rechamberSpeed);
