@@ -11,6 +11,14 @@ public class BattlefieldGUI : MonoBehaviour {
     public GameObject lostMessage;
     public Text creditsText;
 
+    public Button startWaveButton;
+
+    private void Start() {
+        EnemyHandler.OnWaveEnded += (obj, args) => {
+            startWaveButton.interactable = !EnemyHandler.waveStarted;
+        };
+    }
+
     void Update () {
         healthBar.value = baseHealth.health / baseHealth.maxHealth;
         if (baseHealth.health <= 0 && !lostMessage.activeSelf) {
@@ -19,6 +27,11 @@ public class BattlefieldGUI : MonoBehaviour {
         }
         creditsText.text = "CREDITS: <b>" + PlayerInput.GetCredits () + "</b>";
 	}
+
+    public void StartWave () {
+        EnemyHandler.StaticStartWave ();
+        startWaveButton.interactable = !EnemyHandler.waveStarted;
+    }
 
     void Restart() {
         SceneManager.LoadScene (0);

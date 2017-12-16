@@ -8,6 +8,8 @@ public class Turret : MonoBehaviour, IAimable, ILinkable {
     public Transform pitchTransform;
 
     public float rotateSpeed;
+    [Range (0f, 85f)]
+    public float elevationRange = 85f;
 
     public GameObject weapon;
     private IWeapon _weapon;
@@ -51,6 +53,15 @@ public class Turret : MonoBehaviour, IAimable, ILinkable {
                 rot = Quaternion.LookRotation (transformedPos, Vector3.right);
 
                 pitchTransform.localRotation = Quaternion.RotateTowards (pitchTransform.localRotation, Quaternion.Euler (pitchTransform.localRotation.eulerAngles.x + rot.eulerAngles.x, pitchTransform.localRotation.eulerAngles.y, pitchTransform.localRotation.eulerAngles.z), rotateSpeed * Time.fixedDeltaTime);
+                if (pitchTransform.localRotation.eulerAngles.x > 180) { // Looking upwards.
+                    if (pitchTransform.localRotation.eulerAngles.x < 360 - elevationRange) {
+                        pitchTransform.localRotation = Quaternion.Euler (360f - elevationRange, 0f, 0f);
+                    }
+                } else { // Looking downwards.
+                    if (pitchTransform.localRotation.eulerAngles.x > elevationRange) {
+                        pitchTransform.localRotation = Quaternion.Euler (elevationRange, 0f, 0f);
+                    }
+                }
             }
         }
     }
