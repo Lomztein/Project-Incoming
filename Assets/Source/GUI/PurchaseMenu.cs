@@ -10,10 +10,17 @@ public class PurchaseMenu : MonoBehaviour {
     public GameObject hoveringObject;
 
     public List<DefensiveTurret> defensiveTurrets;
+    public float defensiveTurretCostIncreaseCoeffecient = 1.5f;
 
+    public GameObject emplacementMenuPrefab;
+    
     // Use this for initialization
     private void Awake() {
         menu = this;
+    }
+
+    private void Start() {
+        InitializeEmplacementMenus ();
     }
 
     // Update is called once per frame
@@ -35,11 +42,21 @@ public class PurchaseMenu : MonoBehaviour {
 
     public static void Place() {
         if (menu.placeableInHand.Place ()) {
-            if (menu.placeableInHand is DefensiveTurret) {
-                menu.defensiveTurrets.Add (menu.placeableInHand as DefensiveTurret);
-                LinkedFire.Link (menu.defensiveTurrets.ToArray ());
-            }
             menu.placeableInHand = null;
+        }
+    }
+
+    public void SetActive (bool state) {
+        gameObject.SetActive (state);
+    }
+
+    public void InitializeEmplacementMenus () {
+        foreach (Emplacement empl in Emplacement.allEmplacements) {
+            GameObject newEmplacementMenuObj = Instantiate (emplacementMenuPrefab, transform);
+            newEmplacementMenuObj.transform.position = Camera.main.WorldToScreenPoint (empl.transform.position);
+            EmplacementMenuGUI gui = newEmplacementMenuObj.GetComponent<EmplacementMenuGUI> ();
+            gui.emplacement = empl;
+            gui.Init ();
         }
     }
 }

@@ -33,19 +33,21 @@ public class Weapon : MonoBehaviour, IWeapon {
     }
 
     public bool Fire() {
-        if (HasAmmo ()) {
-            if (isChambered) {
-                UseAmmo ();
-                projectileFireable.Fire (muzzle, this);
+        if (CanFire ()) {
+            UseAmmo ();
+            projectileFireable.Fire (muzzle, this);
 
-                audioSource.PlayOneShot (fireSound);
-                GameObject particle = Instantiate (fireParticle, muzzle.position, muzzle.rotation);
-                Destroy (particle, 3f);
+            audioSource.PlayOneShot (fireSound);
+            GameObject particle = Instantiate (fireParticle, muzzle.position, muzzle.rotation);
+            Destroy (particle, 3f);
 
-                return true;
-            }
+            return true;
         }
         return false;
+    }
+
+    public virtual bool CanFire () {
+        return HasAmmo () && isChambered;
     }
 
     private bool HasAmmo() {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wall : MonoBehaviour {
+public class Wall : MonoBehaviour, IHasHealthbar {
 
     public static Wall wall;
 
@@ -18,6 +18,7 @@ public class Wall : MonoBehaviour {
 
     private void Start() {
         BuildWall ();
+        Invoke ("AddHealthbar", 0.1f);
     }
 
     public void BuildWall() {
@@ -31,10 +32,17 @@ public class Wall : MonoBehaviour {
         }
     }
 
+    void AddHealthbar () {
+        BaseHealthbars.AddHealthbar (new BaseHealthbars.Bar (gameObject, Color.yellow));
+    }
+
     public static float GetTotalHealth() {
         float total = 0f;
         wall.pieces.ForEach (x => total += x.health);
         return total;
     }
 
+    public float GetHealthPercentage() {
+        return GetTotalHealth () / (wall.pieces [ 0 ].maxHealth * wall.pieces.Count);
+    }
 }

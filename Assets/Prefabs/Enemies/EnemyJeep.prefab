@@ -176,6 +176,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1250917882219734
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4364106139663132}
+  m_Layer: 11
+  m_Name: FPSPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1252322486688884
 GameObject:
   m_ObjectHideFlags: 1
@@ -286,7 +301,7 @@ GameObject:
   - component: {fileID: 4365331645732942}
   - component: {fileID: 33869811757674826}
   - component: {fileID: 23912876215795244}
-  - component: {fileID: 64926867419489360}
+  - component: {fileID: 65405258995021512}
   m_Layer: 11
   m_Name: ENEMY_JEEP_Placeholder
   m_TagString: Untagged
@@ -338,6 +353,7 @@ Transform:
   m_Children:
   - {fileID: 4895914398970484}
   - {fileID: 4388735728403656}
+  - {fileID: 4364106139663132}
   m_Father: {fileID: 4499428819769984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -347,26 +363,26 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1116934473028140}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.6536639, y: -0.47605354, z: 0.94774014}
   m_LocalScale: {x: 27.29664, y: 27.296692, z: 27.296692}
   m_Children: []
   m_Father: {fileID: 4713015793362258}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90.00001, y: -180, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: -180, z: 180}
 --- !u!4 &4298000960943034
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1931066709716478}
-  m_LocalRotation: {x: -0.50000006, y: 0.5, z: 0.50000006, w: 0.4999999}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0.596159, y: -0.47605348, z: -1.2847618}
   m_LocalScale: {x: 27.296638, y: 27.296667, z: 27.296667}
   m_Children: []
   m_Father: {fileID: 4713015793362258}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180}
 --- !u!4 &4309658070671562
 Transform:
   m_ObjectHideFlags: 1
@@ -396,6 +412,19 @@ Transform:
   - {fileID: 4559094398483024}
   m_Father: {fileID: 4616739806530758}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4364106139663132
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1250917882219734}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.453, y: 0.205, z: 0.002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4164000960059384}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4365331645732942
 Transform:
@@ -471,7 +500,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1786325172807886}
   m_LocalRotation: {x: -0, y: 0.9914448, z: -0, w: -0.13052678}
-  m_LocalPosition: {x: -1.7303562, y: 1.32, z: 96.32232}
+  m_LocalPosition: {x: 3.16, y: 1.69, z: 63.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4365331645732942}
@@ -504,13 +533,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1031275542738944}
-  m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.65366364, y: -0.47605354, z: -1.2847618}
   m_LocalScale: {x: 27.29664, y: 27.296692, z: 27.296692}
   m_Children: []
   m_Father: {fileID: 4713015793362258}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -90.00001, y: -180, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: -180, z: 180}
 --- !u!4 &4847226736752322
 Transform:
   m_ObjectHideFlags: 1
@@ -557,13 +586,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1839441851438026}
-  m_LocalRotation: {x: -0.50000006, y: 0.5, z: 0.50000006, w: 0.4999999}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0.59615874, y: -0.47605348, z: 0.9477393}
   m_LocalScale: {x: 27.296638, y: 27.296669, z: 27.296669}
   m_Children: []
   m_Father: {fileID: 4713015793362258}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90.00001}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180}
 --- !u!23 &23039367084476584
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -982,8 +1011,8 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 6278bc1895d905e4aaf3657746d168f9, type: 3}
---- !u!64 &64926867419489360
-MeshCollider:
+--- !u!65 &65405258995021512
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -992,10 +1021,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 39d829c2025919242aeb7aee425842e9, type: 3}
+  m_Size: {x: 0.087942585, y: 0.037094597, z: 0.06482628}
+  m_Center: {x: -0.0010110303, y: 0.0048235883, z: 0.018515838}
 --- !u!82 &82456573238398250
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1095,6 +1122,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   isIdle: 1
   ignoreDirection: 1
+  _firstPersonTransform: {fileID: 4364106139663132}
 --- !u!114 &114292662170945652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1107,6 +1135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 5000
+  maxHealth: 5000
   armorRating: 0
   rigidbody: {fileID: 54864544923774380}
   explosion: {fileID: 1297531746251834, guid: 2964cbb03ab0af148bea1e416c85b2b7, type: 2}
@@ -1116,16 +1145,24 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 512
-  value: 0
+  value: 10
   range: 10
   width: 1
-  maxSpeed: 3
+  maxSpeed: 4
   turret: {fileID: 1237193856660060}
   motorTorque: 2000
   frontWheels:
     rightSide: {fileID: 146854770941056166}
     leftSide: {fileID: 146444343523422812}
     maxAngle: 10
+    rightSideModel: {fileID: 4926267439316248}
+    leftSideModel: {fileID: 4223004305479044}
+  backWheels:
+    rightSide: {fileID: 146047425427582560}
+    leftSide: {fileID: 146188327936919256}
+    maxAngle: 30
+    rightSideModel: {fileID: 4298000960943034}
+    leftSideModel: {fileID: 4776303978710662}
 --- !u!114 &114542307026795210
 MonoBehaviour:
   m_ObjectHideFlags: 1

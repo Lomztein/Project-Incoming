@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : MonoBehaviour, IAimable, ILinkable {
+public class Turret : MonoBehaviour, IAimable, ILinkable, ISupportsFirstPerson {
 
     public Transform yawTransform;
     public Transform pitchTransform;
@@ -32,6 +32,9 @@ public class Turret : MonoBehaviour, IAimable, ILinkable {
         get { return _weapon; }
         set { _weapon = value; }
     }
+
+    public Transform _firstPersonTransform;
+    [HideInInspector] public Transform FirstPersonTransform { get { return _firstPersonTransform; } } // Hide in inspector isn't neccesary, but I like it to be there.
 
     private Vector3 _targetPosition;
 

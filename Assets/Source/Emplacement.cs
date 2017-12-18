@@ -12,8 +12,6 @@ public class Emplacement : MonoBehaviour, ILinkable {
 
     public static List<Emplacement> allEmplacements = new List<Emplacement> ();
 
-    public Button purchaseButton;
-
     public LinkedFire Link {
         get {
             return turret.Link;
@@ -29,7 +27,7 @@ public class Emplacement : MonoBehaviour, ILinkable {
         set { turret.Weapon = value; }
     } 
 
-    private void Awake() {
+    private void Awake () {
         allEmplacements.Add (this);
     }
 
@@ -37,16 +35,12 @@ public class Emplacement : MonoBehaviour, ILinkable {
         allEmplacements = new List<Emplacement> ();
     }
 
-    private void Start() {
-        purchaseButton.transform.position = Camera.main.WorldToScreenPoint (transform.position);
-    }
-
     public void Fire() {
         turret.Fire ();
     }
 
-    private void Update() {
-        if (turret != null) {
+    private void FixedUpdate () {
+        if (turret != null && !Aimbot.isPresent) {
             turret.Aim (PlayerInput.mouseWorldPosition);
             if (Input.GetButton ("Fire1"))
                 Fire ();
@@ -62,13 +56,13 @@ public class Emplacement : MonoBehaviour, ILinkable {
     public void BuildTurret() {
         GameObject newTurret = Instantiate (turretPrefab, transform.position, transform.rotation);
         turret = newTurret.GetComponent<Turret> ();
-        Destroy (purchaseButton.gameObject);
-        LinkedFire.Link (allEmplacements.Where (x => x.turret).ToArray ());
     }
 
     public void ChangeTurret(GameObject newTurret) {
         turretPrefab = newTurret;
-        Destroy (turret.gameObject);
+        if (turret)
+            Destroy (turret.gameObject);
+
         BuildTurret ();
      }
 

@@ -11,15 +11,15 @@ public class EnemyHandler : MonoBehaviour {
     public EnemyType[] enemies;
     public Queue<GameObject> enemyQueue = new Queue<GameObject> ();
 
-    public float spawnDelay = 2f;
-    public float minSpawnDelay = 0.5f;
+    public float maxSpawnDelay;
+    public float minSpawnDelay;
+    public AnimationCurve spawnDelayCurve;
     public int totalPredefinedWaves = 100;
 
     public static bool waveStarted = false;
     public static int waveCount;
 
     public float spawnXRange = 20;
-    public float spawnDelayLowering = 0.5f;
     public int spawnPerWave = 5;
     public int spawnAmount;
 
@@ -38,9 +38,9 @@ public class EnemyHandler : MonoBehaviour {
         GameObject newEnemy = Instantiate (enemyQueue.Dequeue (), transform.position + (UnityEngine.Random.Range (-spawnXRange, spawnXRange) * transform.right), transform.rotation);
         spawnAmount--;
 
-        if (enemyQueue.Count > 0)
-            Invoke ("SpawnNext", spawnDelay);
-        else
+        if (enemyQueue.Count > 0) {
+            Invoke ("SpawnNext", GetSpawnDelay (waveCount));
+        } else
             EndWave ();
     }
 
@@ -52,7 +52,6 @@ public class EnemyHandler : MonoBehaviour {
         waveStarted = true;
         waveCount++;
 
-        enemyHandler.spawnDelay -= enemyHandler.spawnDelayLowering;
         enemyHandler.spawnAmount = enemyHandler.spawnPerWave * waveCount;
 
         PopulateEnemyQueue ();
@@ -115,6 +114,11 @@ public class EnemyHandler : MonoBehaviour {
 
     private static float GetGameProgress (int wave) {
         return wave / (float)enemyHandler.totalPredefinedWaves;
+    }
+
+    public static float GetSpawnDelay (int wave) {
+        float delta = enemyHandler.maxSpawnDelay - enemyHandler.minSpawnDelay;
+        return enemyHandler.minSpawnDelay + delta * enemyHandler.spawnDelayCurve.Evaluate (GetGameProgress (wave));
     }
 
     private void OnDrawGizmos() {

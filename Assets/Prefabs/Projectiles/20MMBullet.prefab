@@ -86,7 +86,7 @@ MonoBehaviour:
   amount: 1
   speed: 150
   mass: 4
-  armorPenetration: 0.3
+  armorPenetration: 0.4
   inaccuracy: 1
   range: 100
   hitParticle: {fileID: 1488440559610420, guid: ef4eccd6c3f270745ac303cdde57363f,

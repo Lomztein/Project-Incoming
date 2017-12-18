@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class BattlefieldGUI : MonoBehaviour {
 
-    public Slider healthBar;
     public BaseHealth baseHealth;
     public GameObject lostMessage;
     public Text creditsText;
@@ -20,7 +19,6 @@ public class BattlefieldGUI : MonoBehaviour {
     }
 
     void Update () {
-        healthBar.value = baseHealth.health / baseHealth.maxHealth;
         if (baseHealth.health <= 0 && !lostMessage.activeSelf) {
             lostMessage.SetActive (true);
             Invoke ("Restart", 5f);

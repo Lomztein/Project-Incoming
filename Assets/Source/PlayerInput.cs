@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +10,20 @@ public class PlayerInput : MonoBehaviour {
     public static Vector3 mouseWorldPosition;
     public Emplacement[] emplacements;
 
-    private TargetFinder aimbot = new TargetFinder ();
-    private Transform aimbotTarget;
-    public LayerMask aimbotLayer;
-    public bool aimbotEnabled;
-
     public long credits = 500;
+
+    public static event EventHandler OnCreditsChanged;
+
+    private Vector3 cameraStartingPosition;
+    private Quaternion cameraStartingRotation;
 
     private void Awake() {
         input = this;
 
         emplacements[0].BuildTurret ();
+
+        cameraStartingPosition = Camera.main.transform.position;
+        cameraStartingRotation = Camera.main.transform.rotation;
     }
 
     public static bool HasCredits(long amount) {
@@ -40,20 +44,38 @@ public class PlayerInput : MonoBehaviour {
 
     public static void GiveCredits(long amount) {
         input.credits += amount;
+        
+        if (OnCreditsChanged != null) {
+            OnCreditsChanged (null, null);
+        }
     }
 
-	// Update is called once per frame
-	void Update () {
-        if (aimbotEnabled) {
-            if (!aimbotTarget) {
-                aimbotTarget = aimbot.FindTarget (Vector3.zero, 50, aimbotLayer);
-            } else
-                mouseWorldPosition = aimbotTarget.position;
+    private ISupportsFirstPerson cameraFirstPerson;
+
+    void Update() {
+
+        if ((cameraFirstPerson as UnityEngine.Object) == null) {
+            Camera.main.transform.position = cameraStartingPosition;
+            Camera.main.transform.rotation = cameraStartingRotation;
         } else {
-            Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
-            RaycastHit hit;
-            if (Map.gameMap.worldPlaneCollider.Raycast (mouseRay, out hit, Mathf.Infinity)) {
-                mouseWorldPosition = hit.point;
+            Camera.main.transform.position = cameraFirstPerson.FirstPersonTransform.position;
+            Camera.main.transform.rotation = cameraFirstPerson.FirstPersonTransform.rotation;
+        }
+
+        Ray mouseRay = Camera.main.ScreenPointToRay (Input.mousePosition);
+        RaycastHit hit;
+        if (Map.gameMap.worldPlaneCollider.Raycast (mouseRay, out hit, Mathf.Infinity)) {
+            mouseWorldPosition = hit.point;
+        }
+
+        if (Input.GetButtonDown ("Fire2")) {
+            if (cameraFirstPerson == null) {
+                if (Physics.Raycast (mouseRay, out hit, Mathf.Infinity)) {
+                    cameraFirstPerson = hit.transform.root.GetComponentInChildren<ISupportsFirstPerson>();
+                }
+            } else {
+                Camera.main.transform.SetParent (null);
+                cameraFirstPerson = null;
             }
         }
     }

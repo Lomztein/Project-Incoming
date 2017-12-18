@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseHealth : MonoBehaviour {
+public class BaseHealth : MonoBehaviour, IHasHealthbar {
 
     public float health;
     public float maxHealth;
 
+    private void Start() {
+        BaseHealthbars.AddHealthbar (new BaseHealthbars.Bar (gameObject, Color.green));
+    }
+
     public void Damage(Damage damage) {
         health -= damage.damage;
+    }
+
+    public float GetHealthPercentage() {
+        return health / maxHealth;
     }
 
     void OnTriggerEnter(Collider other) {

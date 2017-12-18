@@ -21,7 +21,8 @@ public class AttackingEnemy : Enemy, IAimable {
         _targetPosition = position;
     }
 
-    void Awake() {
+    public override void Start() {
+        base.Start ();
         _turret = turret.GetComponent<IAimable> ();
     }
 
@@ -29,7 +30,7 @@ public class AttackingEnemy : Enemy, IAimable {
         _turret.SetIdle ();
     }
 
-    private void FixedUpdate() {
+    public virtual void FixedUpdate() {
         Aim (transform.position + Quaternion.Euler (0f, moveDirection, 0f) * Vector3.forward);
 
         Vector3 between = (TargetPosition - transform.position).normalized;
@@ -40,7 +41,7 @@ public class AttackingEnemy : Enemy, IAimable {
         if (target) {
             _turret.Aim (target.position);
 
-            if (Vector3.Distance (transform.position, target.position) < range) {
+            if (Vector3.Distance (transform.position, target.position) <= range) {
                 Fire ();
                 Brake ();
             } else {
@@ -50,7 +51,7 @@ public class AttackingEnemy : Enemy, IAimable {
             if (rigidbody.velocity.magnitude < maxSpeed) {
                 Drive (1);
             } else {
-                Drive (0);
+                Brake ();
             }
 
             _turret.SetIdle ();

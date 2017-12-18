@@ -33,16 +33,19 @@ public class ThreadedEnemy : AttackingEnemy {
     public class Thread {
 
         public WheelCollider [ ] wheelColliders;
+        public Material material;
 
         public void SetTorque (float torque) {
             for (int i = 0; i < wheelColliders.Length; i++) {
                 wheelColliders [ i ].motorTorque = torque;
+                wheelColliders [ i ].brakeTorque = 0f;
             }
         }
 
         public void Brake (float torque) {
             for (int i = 0; i < wheelColliders.Length; i++) {
                 wheelColliders [ i ].brakeTorque = torque;
+                wheelColliders [ i ].motorTorque = 0f;
             }
         }
     }

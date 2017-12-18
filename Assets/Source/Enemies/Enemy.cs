@@ -5,11 +5,13 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
 
     public float health;
+    public float maxHealth;
     public float armorRating;
 
     public new Rigidbody rigidbody;
     public GameObject explosion;
     public GameObject debris;
+    private Healthbar healthbar;
 
     public float moveDirection = 180f;
     public Transform target;
@@ -20,10 +22,6 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
 
     public float range = 10f;
     public float width = 1f;
-
-    void Start () {
-        Debug.Log (CompareWith (Emplacement.allEmplacements[0].turret.Weapon as Weapon));
-    }
 
     public string CompareWith(Weapon other) {
         Projectile proj = other.projectile.GetComponent<Projectile> ();
@@ -38,6 +36,15 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
             Explode ();
     }
 
+    public virtual void Start () {
+        healthbar = HealthbarManager.CreateHealthbar ();
+    }
+
+    public virtual void Update() {
+        healthbar.SetHealth (GetHealthPercentage ());
+        healthbar.transform.position = Camera.main.WorldToScreenPoint (transform.position + Vector3.right * width / 2f + Vector3.right);
+    }
+
     public virtual void Explode() {
         PlayerInput.GiveCredits (value);
 
@@ -49,6 +56,11 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
         Destroy (debrisObject, 10f);
         Destroy (Instantiate (explosion, transform.position, transform.rotation), 10f);
         Destroy (gameObject);
+
+        Destroy (healthbar.gameObject);
     }
 
+    public float GetHealthPercentage() {
+        return health / maxHealth;
+    }
 }
