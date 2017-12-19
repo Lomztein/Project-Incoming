@@ -1,30 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class EmplacementPurchaseButton : PurchaseButton {
-
-    public bool purchased;
-
-    public EmplacementTurretSelectionGUI parentGUI;
+public class EmplacementTurretPurchaseButton : EmplacementMenuPurchaseButtonBase {
 
     public override void Purchase() {
         if (purchased) {
-            parentGUI.OnPurchase (this);
+            parentGUI.OnSelectTurret (this);
             return;
         }
 
         if (PlayerInput.TryUseCredits (cost)) {
             purchased = true;
-            parentGUI.OnPurchase (this);
+            parentGUI.OnSelectTurret (this);
         }
     }
 
     public override void UpdateInteractable() {
-        thisButton.interactable = (purchased || PlayerInput.HasCredits (cost)) && !IsCurrentTurret ();
+        thisButton.interactable = (purchased || PlayerInput.HasCredits (cost)) && !IsCurrentItem ();
     }
 
-    private bool IsCurrentTurret() {
+    public override bool IsCurrentItem() {
         return parentGUI.currentTurretButton == this;
     }
 }

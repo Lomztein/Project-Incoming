@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4180157518092566}
   - component: {fileID: 114055294081519314}
   m_Layer: 0
-  m_Name: BasicCannonShell
+  m_Name: UraniumCoreCannonShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,7 +115,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: bd269ae87b948224ba655bf9868f6be0, type: 2}
+  - {fileID: 2100000, guid: 13b7ee4b3b484ee45a9c55d9f962b60c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -157,7 +157,7 @@ TrailRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: 2100000, guid: bd269ae87b948224ba655bf9868f6be0, type: 2}
+  - {fileID: 2100000, guid: 13b7ee4b3b484ee45a9c55d9f962b60c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -250,8 +250,8 @@ MonoBehaviour:
   weapon: {fileID: 0}
   amount: 1
   speed: 200
-  mass: 12.5
-  armorPenetration: 1
+  mass: 10
+  armorPenetration: 5
   inaccuracy: 0
   range: 100
   hitParticle: {fileID: 1687878444457822, guid: 94bdc1840971a104fbb0fce73400f5ac,

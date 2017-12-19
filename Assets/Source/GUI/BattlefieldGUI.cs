@@ -9,13 +9,31 @@ public class BattlefieldGUI : MonoBehaviour {
     public BaseHealth baseHealth;
     public GameObject lostMessage;
     public Text creditsText;
+    public Text nextWaveContent;
 
     public Button startWaveButton;
 
     private void Start() {
-        EnemyHandler.OnWaveEnded += (obj, args) => {
+        UpdateNextWaveContent ();
+
+        EnemyHandler.OnWaveEnded += () => {
             startWaveButton.interactable = !EnemyHandler.waveStarted;
+            UpdateNextWaveContent ();
         };
+    }
+
+    private void UpdateNextWaveContent () {
+        int [ ] amounts = EnemyHandler.enemyHandler.CalculateSpawnAmount (EnemyHandler.waveCount + 1, EnemyHandler.GetSpawnAmount (EnemyHandler.waveCount + 1));
+        string text = "";
+        for (int i = 0; i < amounts.Length; i++) {
+            if (amounts [ i ] != 0) {
+                text += EnemyHandler.enemyHandler.GetEnemyType (i).enemy.name + " - " + amounts [ i ];
+                if (i != amounts.Length - 1)
+                    text += "\n";
+            }
+        }
+
+        nextWaveContent.text = text;
     }
 
     void Update () {

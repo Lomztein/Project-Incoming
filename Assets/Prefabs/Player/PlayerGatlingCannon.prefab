@@ -692,3 +692,6 @@ MonoBehaviour:
   ignoreDirection: 1
   _firstPersonTransform: {fileID: 4874493335608112}
   cost: 2000
+  possibleProjectiles:
+  - {fileID: 1608416371570562, guid: 78ede84e2c7c0b7458962d48defedead, type: 2}
+  - {fileID: 1608416371570562, guid: c409e641bfb55e943bc371cf8517652a, type: 2}

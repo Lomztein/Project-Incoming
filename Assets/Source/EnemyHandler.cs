@@ -23,7 +23,9 @@ public class EnemyHandler : MonoBehaviour {
     public int spawnPerWave = 5;
     public int spawnAmount;
 
-    public static event EventHandler OnWaveEnded;
+    public delegate void WaveEventHandler ();
+    public static event WaveEventHandler OnWaveEnded;
+    public static event WaveEventHandler OnWaveStarted;
 
     // Use this for initialization
     private void Awake() {
@@ -51,11 +53,15 @@ public class EnemyHandler : MonoBehaviour {
     public void StartWave() {
         waveStarted = true;
         waveCount++;
-
-        enemyHandler.spawnAmount = enemyHandler.spawnPerWave * waveCount;
+        spawnAmount = GetSpawnAmount (waveCount);
 
         PopulateEnemyQueue ();
         SpawnNext ();
+
+        WaveEventHandler handler = OnWaveStarted;
+        if (handler != null) {
+            handler ();
+        }
     }
 
     private void PopulateEnemyQueue() {
@@ -85,13 +91,13 @@ public class EnemyHandler : MonoBehaviour {
     public void EndWave() {
         waveStarted = false;
 
-        EventHandler handler = OnWaveEnded;
+        WaveEventHandler handler = OnWaveEnded;
         if (handler != null) {
-            handler (this, null);
+            handler ();
         }
     }
 
-    private int[] CalculateSpawnAmount (int wave, int total) {
+    public int[] CalculateSpawnAmount (int wave, int total) {
 
         int [ ] spawnAmount = new int [ enemies.Length ];
         float totalPercentage = 0f; // This termonology doesn't make sense, just act like it does.
@@ -108,12 +114,20 @@ public class EnemyHandler : MonoBehaviour {
         return spawnAmount;
     }
 
+    public EnemyType GetEnemyType (int index) {
+        return enemies [ index ];
+    }
+
     private static float GetGameProgress() {
         return waveCount / (float)enemyHandler.totalPredefinedWaves;
     }
 
     private static float GetGameProgress (int wave) {
         return wave / (float)enemyHandler.totalPredefinedWaves;
+    }
+
+    public static int GetSpawnAmount (int wave) {
+        return enemyHandler.spawnPerWave * wave;
     }
 
     public static float GetSpawnDelay (int wave) {

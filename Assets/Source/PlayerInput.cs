@@ -31,8 +31,8 @@ public class PlayerInput : MonoBehaviour {
     }
 
     public static bool TryUseCredits(long amount) {
-        if (input.credits >= amount) {
-            input.credits -= amount;
+        if (HasCredits (amount)) {
+            GiveCredits (-amount);
             return true;
         }
         return false;

@@ -28,8 +28,17 @@ public class Weapon : MonoBehaviour, IWeapon {
     }
 
     private void Awake() {
-        projectileFireable = projectile.GetComponent<IFireable> ();
+        SetProjectile (projectile);
         Invoke ("Rechamber", rechamberSpeed);
+    }
+
+    public void SetProjectile (GameObject newProjectile) {
+        projectile = newProjectile;
+        projectileFireable = projectile.GetComponent<IFireable> ();
+    }
+
+    public GameObject GetProjectilePrefab () {
+        return projectile;
     }
 
     public bool Fire() {

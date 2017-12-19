@@ -8,10 +8,20 @@ public class PurchaseButton : MonoBehaviour {
     public long cost;
     public GameObject obj;
     public Button thisButton;
+    public RawImage image;
 
     private void Awake() {
         thisButton = GetComponent<Button> ();
         PlayerInput.OnCreditsChanged += PlayerInput_OnCreditsChanged;
+    }
+
+    private void OnDestroy() {
+        PlayerInput.OnCreditsChanged -= PlayerInput_OnCreditsChanged;
+    }
+
+    private void Start() {
+        if (obj)
+            image.texture = Iconography.GenerateIcon (obj);
     }
 
     private void PlayerInput_OnCreditsChanged(object sender, System.EventArgs e) {

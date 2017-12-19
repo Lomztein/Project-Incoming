@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114186105137863256}
   - component: {fileID: 114321716493188422}
   m_Layer: 5
-  m_Name: EmplacementTurretSelectionButton
+  m_Name: EmplacementTurretSelectionButton 1
   m_TagString: UISecondary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1985895379883630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73dabfe1ed92e19418345620df112f96, type: 3}
+  m_Script: {fileID: 11500000, guid: 8703463e54427fc4c989f6d5f718c90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cost: 0

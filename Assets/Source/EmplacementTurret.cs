@@ -6,4 +6,6 @@ public class EmplacementTurret : Turret {
 
     public int cost;
 
+    public GameObject [ ] possibleProjectiles;
+
 }

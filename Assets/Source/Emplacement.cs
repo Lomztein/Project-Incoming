@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Emplacement : MonoBehaviour, ILinkable {
 
     public GameObject turretPrefab;
-    public Turret turret;
+    public EmplacementTurret turret;
 
     public static List<Emplacement> allEmplacements = new List<Emplacement> ();
 
@@ -55,7 +55,20 @@ public class Emplacement : MonoBehaviour, ILinkable {
 
     public void BuildTurret() {
         GameObject newTurret = Instantiate (turretPrefab, transform.position, transform.rotation);
-        turret = newTurret.GetComponent<Turret> ();
+        turret = newTurret.GetComponent<EmplacementTurret> ();
+        turret.transform.SetParent (transform, true);
+    }
+
+    public void ChangeProjectile (GameObject newProjectile) {
+        (turret.Weapon as Weapon).SetProjectile (newProjectile);
+    }
+
+    public GameObject GetProjectilePrefab () {
+        return (turretPrefab.GetComponent<Turret> ().weapon.GetComponent<Weapon>()).GetProjectilePrefab ();
+    }
+
+    public GameObject[] GetProjectileOptions () {
+        return turretPrefab.GetComponent<EmplacementTurret>().possibleProjectiles;
     }
 
     public void ChangeTurret(GameObject newTurret) {

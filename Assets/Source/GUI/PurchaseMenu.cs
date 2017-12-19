@@ -12,7 +12,8 @@ public class PurchaseMenu : MonoBehaviour {
     public List<DefensiveTurret> defensiveTurrets;
     public float defensiveTurretCostIncreaseCoeffecient = 1.5f;
 
-    public GameObject emplacementMenuPrefab;
+    public GameObject emplacementButtonPrefab;
+    public LayerMask playerLayer;
     
     // Use this for initialization
     private void Awake() {
@@ -21,6 +22,14 @@ public class PurchaseMenu : MonoBehaviour {
 
     private void Start() {
         InitializeEmplacementMenus ();
+
+        EnemyHandler.OnWaveEnded += () => {
+            SetActive (true);
+        };
+
+        EnemyHandler.OnWaveStarted += () => {
+            SetActive (false);
+        };
     }
 
     // Update is called once per frame
@@ -52,11 +61,12 @@ public class PurchaseMenu : MonoBehaviour {
 
     public void InitializeEmplacementMenus () {
         foreach (Emplacement empl in Emplacement.allEmplacements) {
-            GameObject newEmplacementMenuObj = Instantiate (emplacementMenuPrefab, transform);
-            newEmplacementMenuObj.transform.position = Camera.main.WorldToScreenPoint (empl.transform.position);
-            EmplacementMenuGUI gui = newEmplacementMenuObj.GetComponent<EmplacementMenuGUI> ();
-            gui.emplacement = empl;
-            gui.Init ();
+            GameObject newButton = Instantiate (emplacementButtonPrefab, transform, false);
+            newButton.transform.position = Camera.main.WorldToScreenPoint (empl.transform.position);
+            EmplacementButton butt = newButton.GetComponent<EmplacementButton> ();
+
+            butt.emplacement = empl;
+            butt.Initialize ();
         }
     }
 }
