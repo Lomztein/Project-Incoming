@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour, IFireable {
     public float inaccuracy;
 
     public float range = 100;
+    public bool destroyOnHit = true;
 
     public GameObject hitParticle;
     public LayerMask hittableLayer;
@@ -54,14 +55,17 @@ public class Projectile : MonoBehaviour, IFireable {
     public virtual void Hit(RaycastHit hit) {
         IDamageable damageable = hit.collider.GetComponentInParent<IDamageable> ();
         if (damageable != null)
-            new Damage (GetDamage (), armorPenetration, weapon).DoDamage (damageable);
+            new Damage (GetDamage (), armorPenetration).DoDamage (damageable);
 
         Rigidbody body = hit.rigidbody;
         if (body) {
             body.AddForceAtPosition (transform.forward * GetDamage (), hit.point, ForceMode.Impulse);
         }
 
-        Destroy (gameObject);
+        if (destroyOnHit) {
+            Destroy (gameObject);
+        }
+
         Destroy (Instantiate (hitParticle, hit.point, Quaternion.LookRotation (hit.normal, Vector3.up)), 5f);
     }
 }

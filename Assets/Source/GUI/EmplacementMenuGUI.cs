@@ -30,6 +30,7 @@ public class EmplacementMenuGUI : GUIWindowBase {
     public override void Close() {
         gameObject.SetActive (false);
         parentButton.gameObject.SetActive (true);
+        parentButton.OnEmplacementMenuClosed ();
     }
 
     public void Init() {

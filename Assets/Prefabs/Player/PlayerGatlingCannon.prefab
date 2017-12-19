@@ -179,8 +179,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1232273673423634}
-  m_LocalRotation: {x: -0, y: 0.7071076, z: -0, w: 0.707106}
-  m_LocalPosition: {x: 5.4613886, y: 5.0657006e-19, z: -2.2813888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.303615, y: -1.5740005e-17, z: 70.88668}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4793674901194306}
@@ -277,7 +277,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1557057893662802}
-  m_LocalRotation: {x: -0, y: -0.70710653, z: -0, w: 0.70710707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0429579, y: 1.0429578, z: 1.0429578}
   m_Children:
@@ -285,7 +285,7 @@ Transform:
   - {fileID: 4489224997772498}
   m_Father: {fileID: 4000135034480810}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4874493335608112
 Transform:
   m_ObjectHideFlags: 1
@@ -695,3 +695,4 @@ MonoBehaviour:
   possibleProjectiles:
   - {fileID: 1608416371570562, guid: 78ede84e2c7c0b7458962d48defedead, type: 2}
   - {fileID: 1608416371570562, guid: c409e641bfb55e943bc371cf8517652a, type: 2}
+  - {fileID: 1608416371570562, guid: 7e5e93ff6a288934298069aaa98e839a, type: 2}

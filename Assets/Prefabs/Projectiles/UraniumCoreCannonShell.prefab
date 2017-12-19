@@ -180,7 +180,7 @@ TrailRenderer:
   m_Time: 0.05
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.1
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -250,10 +250,11 @@ MonoBehaviour:
   weapon: {fileID: 0}
   amount: 1
   speed: 200
-  mass: 10
+  mass: 11.5
   armorPenetration: 5
   inaccuracy: 0
   range: 100
+  destroyOnHit: 1
   hitParticle: {fileID: 1687878444457822, guid: 94bdc1840971a104fbb0fce73400f5ac,
     type: 2}
   hittableLayer:

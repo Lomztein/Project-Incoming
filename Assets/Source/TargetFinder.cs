@@ -18,7 +18,9 @@ public class TargetFinder {
             }
         }
 
-        return pick;
+        if (pick)
+            return pick.root;
+        return null;
     }
 
     public Transform FindTarget(Ray ray, float radius, float distance, LayerMask layer) {

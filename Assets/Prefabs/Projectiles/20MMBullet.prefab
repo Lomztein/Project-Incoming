@@ -89,6 +89,7 @@ MonoBehaviour:
   armorPenetration: 0.4
   inaccuracy: 1
   range: 100
+  destroyOnHit: 1
   hitParticle: {fileID: 1488440559610420, guid: ef4eccd6c3f270745ac303cdde57363f,
     type: 2}
   hittableLayer:

@@ -16,6 +16,11 @@ public class EmplacementButton : PurchaseButton {
         menu.Open ();
     }
 
+    public void OnEmplacementMenuClosed () {
+        obj = emplacement.turretPrefab;
+        image.texture = Iconography.GenerateIcon (obj);
+    }
+
     public override void Purchase() {
         if (emplacement.turret) {
             OpenEmplacementMenu (emplacement);

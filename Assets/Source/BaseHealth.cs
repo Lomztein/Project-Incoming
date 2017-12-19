@@ -22,7 +22,7 @@ public class BaseHealth : MonoBehaviour, IHasHealthbar {
     void OnTriggerEnter(Collider other) {
         Enemy enemy = other.GetComponentInParent<Enemy> ();
         if (enemy) {
-            Damage (new Damage (enemy.value, 0f, null));
+            Damage (new Damage (enemy.value, 0f));
             Destroy (enemy.gameObject);
         }
     }

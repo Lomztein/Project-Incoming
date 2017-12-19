@@ -14,6 +14,7 @@ public class Iconography : MonoBehaviour {
 
     private void Awake() {
         iconography = this;
+        gameObject.SetActive (false);
     }
 
     public static Texture2D GenerateIcon (GameObject obj) {
@@ -36,7 +37,7 @@ public class Iconography : MonoBehaviour {
         Bounds bounds = GetObjectBounds (model);
 
         float camSize = Mathf.Max (Mathf.Abs (bounds.extents.y), Mathf.Abs (bounds.extents.z));
-        renderCamera.orthographicSize = camSize * 1.44f;
+        renderCamera.orthographicSize = camSize;
 
         renderCamera.targetTexture = renderTexture;
         renderCamera.transform.position = bounds.center + renderCamera.transform.forward * Mathf.Max (bounds.extents.x, bounds.extents.y, bounds.extents.z) * -2f;
