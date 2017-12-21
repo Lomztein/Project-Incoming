@@ -78,6 +78,11 @@ public class Turret : MonoBehaviour, IAimable, ILinkable, ISupportsFirstPerson {
         isIdle = true;
     }
 
+    private void OnDestroy() {
+        if (Link != null)
+            Link.RemoveLinkable (this);
+    }
+
     public bool Fire() {
         if (_linkedFire != null) {
             return _linkedFire.Fire ();

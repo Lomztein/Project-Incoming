@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PurchaseMenu : MonoBehaviour {
 
@@ -9,8 +10,7 @@ public class PurchaseMenu : MonoBehaviour {
     public IPlaceable placeableInHand;
     public GameObject hoveringObject;
 
-    public List<DefensiveTurret> defensiveTurrets;
-    public float defensiveTurretCostIncreaseCoeffecient = 1.5f;
+    public Text defensiveTurretCapacityText;
 
     public GameObject emplacementButtonPrefab;
     public LayerMask playerLayer;
@@ -34,16 +34,26 @@ public class PurchaseMenu : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (placeableInHand != null) {
-            placeableInHand.ToPosition (PlayerInput.mouseWorldPosition, Quaternion.identity);
+        if (placeableInHand as Object != null) {
+            Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
+                Transform root = hit.transform.root;
+                if (!placeableInHand.ToTransform (root)) {
+                    placeableInHand.ToPosition (PlayerInput.mouseWorldPosition, Quaternion.identity);
+                }
+            }
 
             if (Input.GetButtonDown ("Fire1"))
                 Place ();
         }
+
+        defensiveTurretCapacityText.text = "Turrets: " + DefensiveTurret.allDefensiveTurrets.Count + " / " + DefensiveTurret.defensiveTurretCapacity;
 	}
 
     public static void PickUp(IPlaceable placeable) {
-        if (menu.placeableInHand == null) {
+        if (menu.placeableInHand as Object == null) {
             menu.placeableInHand = placeable;
             placeable.PickUp ();
         }

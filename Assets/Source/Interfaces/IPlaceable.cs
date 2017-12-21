@@ -6,7 +6,7 @@ public interface IPlaceable {
 
     bool ToPosition(Vector3 position, Quaternion rotation);
 
-    bool ToTransform(Transform transform);
+    bool ToTransform(Transform toTransform);
 
     bool Place();
 

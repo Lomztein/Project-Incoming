@@ -36,4 +36,9 @@ public class LinkedWeapons : IWeapon {
     public float GetFirerate() {
         return weapons [ 0 ].GetFirerate () * weapons.Length;
     }
+
+    public void Reload() {
+        foreach (Weapon weapon in weapons)
+            weapon.Reload ();
+    }
 }

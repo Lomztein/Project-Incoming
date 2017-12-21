@@ -34,6 +34,8 @@ public class PurchaseButton : MonoBehaviour {
             IPlaceable placeable = newObject.GetComponent<IPlaceable> ();
             PurchaseMenu.PickUp (placeable);
         }
+
+        UpdateInteractable ();
     }
 
     public virtual void UpdateInteractable () {

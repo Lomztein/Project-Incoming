@@ -7,6 +7,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
     public float health;
     public float maxHealth;
     public float armorRating;
+    private bool isDead = false;
 
     public new Rigidbody rigidbody;
     public GameObject explosion;
@@ -46,18 +47,21 @@ public abstract class Enemy : MonoBehaviour, IDamageable, IComparable<Weapon> {
     }
 
     public virtual void Explode() {
-        PlayerInput.GiveCredits (value);
+        if (!isDead) {
+            isDead = true;
+            PlayerInput.GiveCredits (value);
 
-        GameObject debrisObject = Instantiate (debris, transform.position, transform.rotation);
-        Rigidbody debrisRigid = debrisObject.GetComponent<Rigidbody> ();
-        debrisRigid.AddForce (Vector3.up * Random.Range (10f, 15f), ForceMode.VelocityChange);
-        debrisRigid.AddTorque (Random.insideUnitSphere * Random.Range (100, 300), ForceMode.VelocityChange);
+            GameObject debrisObject = Instantiate (debris, transform.position, transform.rotation);
+            Rigidbody debrisRigid = debrisObject.GetComponent<Rigidbody> ();
+            debrisRigid.AddForce (Vector3.up * Random.Range (10f, 15f), ForceMode.VelocityChange);
+            debrisRigid.AddTorque (Random.insideUnitSphere * Random.Range (100, 300), ForceMode.VelocityChange);
 
-        Destroy (debrisObject, 10f);
-        Destroy (Instantiate (explosion, transform.position, transform.rotation), 10f);
-        Destroy (gameObject);
+            Destroy (debrisObject, 10f);
+            Destroy (Instantiate (explosion, transform.position, transform.rotation), 10f);
+            Destroy (gameObject);
 
-        Destroy (healthbar.gameObject);
+            Destroy (healthbar.gameObject);
+        }
     }
 
     public float GetHealthPercentage() {

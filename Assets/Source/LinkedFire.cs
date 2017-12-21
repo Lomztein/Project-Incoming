@@ -28,6 +28,12 @@ public class LinkedFire {
         newLinkable.Link = this;
         linkables.Add (newLinkable);
         linkedFireRate = newLinkable.GetFirerate () / linkables.Count;
+        newLinkable.Weapon.Reload ();
+    }
+
+    public void RemoveLinkable (ILinkable linkable) {
+        linkables.Remove (linkable);
+        linkedFireRate = linkable.GetFirerate () / linkables.Count;
     }
 
     public bool Fire() {

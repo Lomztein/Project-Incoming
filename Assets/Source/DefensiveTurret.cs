@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefensiveTurret : Turret, IPlaceable {
+public class DefensiveTurret : Turret, IPlaceable, ISellable {
+
+    public static List<DefensiveTurret> allDefensiveTurrets = new List<DefensiveTurret> ();
+    public static int defensiveTurretCapacity = 2;
+    public static int defensiveTurretMaxCapacity = 8;
 
     public TargetFinder targetFinder = new TargetFinder ();
     public Transform target;
@@ -10,7 +14,18 @@ public class DefensiveTurret : Turret, IPlaceable {
     public LayerMask targetLayerMask;
     public float range;
 
+    public long cost;
+
+    public static bool AtCapacity () {
+        return allDefensiveTurrets.Count >= defensiveTurretCapacity;
+    }
+
+    public int GetSellValue() {
+        return Mathf.RoundToInt (cost * 0.75f);
+    }
+
     public bool PickUp() {
+        allDefensiveTurrets.Add (this);
         enabled = false;
         return true;
     }
@@ -18,6 +33,11 @@ public class DefensiveTurret : Turret, IPlaceable {
     public bool Place() {
         enabled = true;
         return true;
+    }
+
+    public void Sell() {
+        Destroy (gameObject);
+        allDefensiveTurrets.Remove (this);
     }
 
     public bool ToPosition(Vector3 position, Quaternion rotation) {

@@ -14,4 +14,6 @@ public interface IWeapon {
 
     float GetDPS();
 
+    void Reload();
+
 }

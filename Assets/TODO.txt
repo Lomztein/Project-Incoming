@@ -1,8 +1,3 @@
 PROTOTYPE STAGE
- - Add final gatling cannon bullet type.
- - Rework gatling cannon model.
  - Add tank debris.
- - Create a turret construction menu.
- - Create a second turret type.
  - Let emplacement menus be closeable.
- - Fix enemy death dublication bug

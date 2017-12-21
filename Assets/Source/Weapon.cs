@@ -78,7 +78,7 @@ public class Weapon : MonoBehaviour, IWeapon {
         isChambered = true;
     }
 
-    private void Reload() {
+    public void Reload() {
         ammo = maxAmmo;
     }
 
