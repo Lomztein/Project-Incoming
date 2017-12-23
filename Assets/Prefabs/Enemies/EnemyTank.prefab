@@ -958,7 +958,7 @@ MonoBehaviour:
   armorRating: 1
   rigidbody: {fileID: 54479357867788988}
   explosion: {fileID: 1297531746251834, guid: 2964cbb03ab0af148bea1e416c85b2b7, type: 2}
-  debris: {fileID: 1109166364608516, guid: 1c3ec396c91b9bb49a6f61fdeb153c28, type: 2}
+  debris: {fileID: 1677544117270986, guid: d0d336a4b9eea15478e098d762651cea, type: 2}
   moveDirection: 180
   target: {fileID: 0}
   targetLayer:
@@ -967,6 +967,9 @@ MonoBehaviour:
   value: 25
   range: 20
   width: 3
+  description: This highly armored vehicle boasts both a lot of health, as well as
+    a high-damage cannon. While it is slow, it should not be allowed to reach your
+    walls.
   maxSpeed: 2
   turret: {fileID: 1802898068125100}
   rightSide:

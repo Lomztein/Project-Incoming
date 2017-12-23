@@ -1148,6 +1148,9 @@ MonoBehaviour:
   value: 10
   range: 10
   width: 1
+  description: Both lightly armored and lightly armed, this basic vehicle is mostly
+    just cannon fodder. It will however chew through your walls if left alone, albiet
+    slowly.
   maxSpeed: 4
   turret: {fileID: 1237193856660060}
   motorTorque: 2000

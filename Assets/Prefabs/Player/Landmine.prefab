@@ -125,8 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRange: 5
-  explosionDamage: 20000
-  explosionArmorPenetration: 0.5
+  explosionDamage: 50000
+  explosionArmorPenetration: 666
   explosionForce: 200000
   explosionDamageFalloff:
     serializedVersion: 2

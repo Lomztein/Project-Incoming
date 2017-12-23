@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LinkedFire {
 
-    // TODO, possibly change linked objects to IAimables instead.
     public List<ILinkable> linkables = new List<ILinkable> ();
     public float linkedFireRate = 0;
 
@@ -22,6 +21,7 @@ public class LinkedFire {
         foreach (ILinkable linkable in newLinkables) {
             newLink.AddLinkable (linkable);
         }
+        newLink.linkIndex = 0;
     }
 
     public void AddLinkable(ILinkable newLinkable) {
@@ -36,8 +36,14 @@ public class LinkedFire {
         linkedFireRate = linkable.GetFirerate () / linkables.Count;
     }
 
+    public void ClearLinkable (ILinkable linkable) {
+        if (linkable.Link != null)
+            linkable.Link.RemoveLinkable (linkable);
+        linkable.Link = null;
+    }
+
     public bool Fire() {
-        if (Time.time > readyTime) {
+        if (Time.time >= readyTime) {
             if (linkables [ linkIndex ].Weapon.Fire ()) {
                 linkables [ linkIndex ].OnFire ();
 

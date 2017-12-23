@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Tool<T> : MonoBehaviour, IPlaceable {
 
-    private Transform lastTransform;
+    protected Transform lastTransform;
     protected T item;
 
     public bool PickUp() {

@@ -30,9 +30,7 @@ public class Landmine : MonoBehaviour, IPlaceable {
     }
 
     public bool ToTransform(Transform transform) {
-        this.transform.position = transform.position;
-        this.transform.rotation = transform.rotation;
-        return true;
+        return false;
     }
 
     void OnTriggerEnter (Collider other) {

@@ -85,7 +85,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   amount: 1
   speed: 350
-  mass: 0.1
+  mass: 0.4
   armorPenetration: 0
   inaccuracy: 2
   range: 100

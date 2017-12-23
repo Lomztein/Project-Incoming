@@ -10,6 +10,7 @@ public class PurchaseButton : MonoBehaviour {
     public Button thisButton;
     public RawImage image;
 
+
     private void Awake() {
         thisButton = GetComponent<Button> ();
         PlayerInput.OnCreditsChanged += PlayerInput_OnCreditsChanged;
@@ -20,7 +21,7 @@ public class PurchaseButton : MonoBehaviour {
     }
 
     private void Start() {
-        if (obj)
+        if (obj && image)
             image.texture = Iconography.GenerateIcon (obj);
     }
 

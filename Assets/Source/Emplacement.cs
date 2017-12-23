@@ -5,27 +5,12 @@ using System.Linq;
 
 using UnityEngine.UI;
 
-public class Emplacement : MonoBehaviour, ILinkable {
+public class Emplacement : MonoBehaviour {
 
     public GameObject turretPrefab;
     public EmplacementTurret turret;
 
     public static List<Emplacement> allEmplacements = new List<Emplacement> ();
-
-    public LinkedFire Link {
-        get {
-            return turret.Link;
-        }
-
-        set {
-            turret.Link = value;
-        }
-    }
-
-    public IWeapon Weapon {
-        get { return turret.Weapon; }
-        set { turret.Weapon = value; }
-    } 
 
     private void Awake () {
         allEmplacements.Add (this);

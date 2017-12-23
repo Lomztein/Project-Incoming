@@ -9,7 +9,10 @@ public class BattlefieldGUI : MonoBehaviour {
     public BaseHealth baseHealth;
     public GameObject lostMessage;
     public Text creditsText;
-    public Text nextWaveContent;
+
+    public RectTransform nextWaveParent;
+
+    public GameObject enemyEntryPrefab;
 
     public Button startWaveButton;
 
@@ -24,16 +27,23 @@ public class BattlefieldGUI : MonoBehaviour {
 
     private void UpdateNextWaveContent () {
         int [ ] amounts = EnemyHandler.enemyHandler.CalculateSpawnAmount (EnemyHandler.waveCount + 1, EnemyHandler.GetSpawnAmount (EnemyHandler.waveCount + 1));
-        string text = "";
-        for (int i = 0; i < amounts.Length; i++) {
-            if (amounts [ i ] != 0) {
-                text += EnemyHandler.enemyHandler.GetEnemyType (i).enemy.name + " - " + amounts [ i ];
-                if (i != amounts.Length - 1)
-                    text += "\n";
-            }
+        foreach (Transform child in nextWaveParent) {
+            Destroy (child.gameObject);
         }
 
-        nextWaveContent.text = text;
+        for (int i = 0; i < amounts.Length; i++) {
+            if (amounts [ i ] != 0) {
+                GameObject newEntry = Instantiate (enemyEntryPrefab, nextWaveParent);
+                WaveEnemyEntry entry = newEntry.GetComponent<WaveEnemyEntry> ();
+
+                entry.enemyObject = EnemyHandler.enemyHandler.enemies [ i ].enemy;
+                entry.count = amounts [ i ];
+                entry.UpdateGUI ();
+
+                // Reverse order so that easier enemies are at the top.
+                newEntry.transform.SetAsFirstSibling ();
+            }
+        }
     }
 
     void Update () {
