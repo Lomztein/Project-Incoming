@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour, IFireable {
         for (int i = 0; i < amount; i++) {
             GameObject newBullet = Instantiate (gameObject, muzzle.position, Quaternion.identity);
             Projectile projectile = newBullet.GetComponent<Projectile> ();
-            projectile.hittableLayer = firingWeapon.hittableLayer;
+            projectile.hittableLayer += firingWeapon.hittableLayer;
 
             float rad = inaccuracy * Mathf.Deg2Rad;
 
@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour, IFireable {
         return speed * mass;
     }
 
-    private void FixedUpdate() {
+    public virtual void FixedUpdate() {
         Ray nextRay = new Ray (transform.position, directionVector * Time.fixedDeltaTime);
         RaycastHit hit;
 
@@ -67,5 +67,6 @@ public class Projectile : MonoBehaviour, IFireable {
         }
 
         Destroy (Instantiate (hitParticle, hit.point, Quaternion.LookRotation (hit.normal, Vector3.up)), 5f);
+        SendMessage ("OnHit", hit, SendMessageOptions.DontRequireReceiver);
     }
 }

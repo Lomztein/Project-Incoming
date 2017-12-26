@@ -22,4 +22,10 @@ public class UpgradeHandler : MonoBehaviour {
         turretCapacityUpgradeButton.UpdateInteractable ();
     }
 
+    public void RepairWalls () {
+        if (PlayerInput.TryUseCredits (Mathf.RoundToInt ((Wall.wall.GetTotalMaxHealth () - Wall.GetTotalHealth ()) / 500))) {
+            Wall.wall.BuildWall ();
+        }
+    }
+
 }

@@ -13,7 +13,9 @@ public class HealthbarManager : MonoBehaviour {
     }
 
     public static Healthbar CreateHealthbar () {
-        return Instantiate (healthbarManager.healthbarPrefab, Vector3.right * 9001, Quaternion.identity, healthbarManager.transform).GetComponent<Healthbar>();
+        if (healthbarManager)
+            return Instantiate (healthbarManager.healthbarPrefab, Vector3.right * 9001, Quaternion.identity, healthbarManager.transform).GetComponent<Healthbar>();
+        return null;
     }
 
 }

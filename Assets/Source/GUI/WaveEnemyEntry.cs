@@ -15,7 +15,7 @@ public class WaveEnemyEntry : MonoBehaviour {
     public void UpdateGUI () {
         enemy = enemyObject.GetComponent<Enemy> ();
         image.texture = Iconography.GenerateIcon (enemyObject);
-        IDescribed described = enemy as IDescribed;
+        IDescribed described = enemyObject.GetComponent<IDescribed>();
         text.text = described.Name + "\nX " + count;
     }
 

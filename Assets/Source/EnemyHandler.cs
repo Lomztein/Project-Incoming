@@ -17,7 +17,8 @@ public class EnemyHandler : MonoBehaviour {
     public int totalPredefinedWaves = 100;
 
     public static bool waveStarted = false;
-    public static int waveCount;
+    public static int WaveCount { get { return enemyHandler.wave; } set { enemyHandler.wave = value; } }
+    public int wave;
 
     public float spawnXRange = 20;
     public int spawnPerWave = 5;
@@ -41,7 +42,7 @@ public class EnemyHandler : MonoBehaviour {
         spawnAmount--;
 
         if (enemyQueue.Count > 0) {
-            Invoke ("SpawnNext", GetSpawnDelay (waveCount));
+            Invoke ("SpawnNext", GetSpawnDelay (WaveCount));
         } else
             EndWave ();
     }
@@ -52,8 +53,8 @@ public class EnemyHandler : MonoBehaviour {
 
     public void StartWave() {
         waveStarted = true;
-        waveCount++;
-        spawnAmount = GetSpawnAmount (waveCount);
+        WaveCount++;
+        spawnAmount = GetSpawnAmount (WaveCount);
 
         PopulateEnemyQueue ();
         SpawnNext ();
@@ -65,7 +66,7 @@ public class EnemyHandler : MonoBehaviour {
     }
 
     private void PopulateEnemyQueue() {
-        PopulateEnemyQueue (CalculateSpawnAmount (waveCount, spawnAmount));
+        PopulateEnemyQueue (CalculateSpawnAmount (WaveCount, spawnAmount));
     }
 
     private void PopulateEnemyQueue (int[] toSpawn) {
@@ -119,7 +120,7 @@ public class EnemyHandler : MonoBehaviour {
     }
 
     private static float GetGameProgress() {
-        return waveCount / (float)enemyHandler.totalPredefinedWaves;
+        return WaveCount / (float)enemyHandler.totalPredefinedWaves;
     }
 
     private static float GetGameProgress (int wave) {

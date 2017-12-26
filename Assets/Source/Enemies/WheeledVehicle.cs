@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WheeledEnemy : AttackingEnemy {
+public class WheeledVehicle : Vehicle {
 
     public float motorTorque;
 
     public Axel frontWheels;
     public Axel backWheels;
 
-    public override void Drive (int direction) {
+    public override void Move (float direction) {
         frontWheels.SetTorque (motorTorque * direction);
     }
 
-    public override void TurnTowards (float angle) {
+    public override void Turn (float angle) {
         frontWheels.SteerTowards (angle);
         frontWheels.SetBrakeTorque (0f);
     }
@@ -23,8 +23,7 @@ public class WheeledEnemy : AttackingEnemy {
         frontWheels.SetBrakeTorque (motorTorque);
     }
 
-    public override void FixedUpdate () {
-        base.FixedUpdate ();
+    private void FixedUpdate () {
         frontWheels.Update ();
         backWheels.Update ();
     }

@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThreadedEnemy : AttackingEnemy {
+public class ThreadedVehicle : Vehicle {
 
     public Thread rightSide;
     public Thread leftSide;
 
     public float motorTorque;
 
-    public override void Drive(int direction) {
+    public override void Move(float direction) {
         rightSide.SetTorque (motorTorque * direction);
         leftSide.SetTorque (motorTorque * direction);
     }
 
-    public override void TurnTowards(float angle) {
-        if (angle > 0f) {
+    public override void Turn(float angle) {
+        if (angle > 1f) {
             rightSide.SetTorque (-motorTorque);
             leftSide.SetTorque (motorTorque);
-        } else {
+        } else if (angle < -1f) {
             rightSide.SetTorque (motorTorque);
             leftSide.SetTorque (-motorTorque);
         }

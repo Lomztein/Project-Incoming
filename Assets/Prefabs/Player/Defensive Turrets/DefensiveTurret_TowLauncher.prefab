@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4327962066982892}
   - component: {fileID: 114330242561022720}
   - component: {fileID: 95231144519361216}
+  - component: {fileID: 114804111227334836}
   m_Layer: 12
   m_Name: DefensiveTurret_TowLauncher
   m_TagString: Untagged
@@ -520,17 +521,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86183848d06f6234f8cd0f6d605c317a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  turret: {fileID: 114804111227334836}
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  range: 50
+  cost: 0
+--- !u!114 &114804111227334836
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1074484996661034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f496b29ac03f6de45a8c56323e400912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   yawTransform: {fileID: 4868775755462924}
   pitchTransform: {fileID: 4663640119288056}
-  rotateSpeed: 90
-  elevationRange: 50
+  rotateSpeed: 30
+  elevationRange: 45
   weapon: {fileID: 1454011684826732}
   animator: {fileID: 95231144519361216}
   isIdle: 1
   ignoreDirection: 0
   _firstPersonTransform: {fileID: 4861296012813654}
-  target: {fileID: 0}
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 2048
-  range: 50

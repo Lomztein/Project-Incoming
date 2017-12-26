@@ -26,7 +26,7 @@ public class BattlefieldGUI : MonoBehaviour {
     }
 
     private void UpdateNextWaveContent () {
-        int [ ] amounts = EnemyHandler.enemyHandler.CalculateSpawnAmount (EnemyHandler.waveCount + 1, EnemyHandler.GetSpawnAmount (EnemyHandler.waveCount + 1));
+        int [ ] amounts = EnemyHandler.enemyHandler.CalculateSpawnAmount (EnemyHandler.WaveCount + 1, EnemyHandler.GetSpawnAmount (EnemyHandler.WaveCount + 1));
         foreach (Transform child in nextWaveParent) {
             Destroy (child.gameObject);
         }

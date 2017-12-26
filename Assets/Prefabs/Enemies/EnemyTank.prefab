@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4254216619740240}
   - component: {fileID: 114201226432920566}
   - component: {fileID: 54479357867788988}
+  - component: {fileID: 114860195263761328}
   m_Layer: 11
   m_Name: EnemyTank
   m_TagString: Untagged
@@ -953,24 +954,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e0ea264e7091349984d200793a75a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20000
-  maxHealth: 20000
+  health: 10000
+  maxHealth: 10000
   armorRating: 1
   rigidbody: {fileID: 54479357867788988}
   explosion: {fileID: 1297531746251834, guid: 2964cbb03ab0af148bea1e416c85b2b7, type: 2}
   debris: {fileID: 1677544117270986, guid: d0d336a4b9eea15478e098d762651cea, type: 2}
-  moveDirection: 180
-  target: {fileID: 0}
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  value: 25
-  range: 20
   width: 3
-  description: This highly armored vehicle boasts both a lot of health, as well as
-    a high-damage cannon. While it is slow, it should not be allowed to reach your
-    walls.
-  maxSpeed: 2
+  description: This highly armored vehicle boasts twice the health of the light vehicle,
+    as well as a high-damage cannon. While it is slow, it should not be allowed to
+    reach your walls.
+  descriptiveName: Tank
   turret: {fileID: 1802898068125100}
   rightSide:
     wheelColliders:
@@ -1005,6 +999,26 @@ MonoBehaviour:
   isIdle: 1
   ignoreDirection: 0
   _firstPersonTransform: {fileID: 4751601540669270}
+--- !u!114 &114860195263761328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1122533877668912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c686df93692d5c44a2956f7a95b1f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 2
+  moveDirection: 180
+  value: 20
+  range: 20
+  vehicle: {fileID: 114201226432920566}
+  target: {fileID: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114897993380889428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1028,7 +1042,7 @@ MonoBehaviour:
   maxAmmo: -1
   hittableLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 33280
 --- !u!146 &146153640825104962
 WheelCollider:
   m_ObjectHideFlags: 1

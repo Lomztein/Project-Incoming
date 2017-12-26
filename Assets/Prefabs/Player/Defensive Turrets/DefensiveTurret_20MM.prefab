@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 4659934355157382}
   - component: {fileID: 114460167738078974}
   - component: {fileID: 95508166381526944}
+  - component: {fileID: 114086969497487688}
   m_Layer: 12
   m_Name: DefensiveTurret_20MM
   m_TagString: Untagged
@@ -538,6 +539,26 @@ MonoBehaviour:
   hittableLayer:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!114 &114086969497487688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1814366140559076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f496b29ac03f6de45a8c56323e400912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yawTransform: {fileID: 4935453675668062}
+  pitchTransform: {fileID: 4495788710916246}
+  rotateSpeed: 90
+  elevationRange: 30
+  weapon: {fileID: 1363995658160660}
+  animator: {fileID: 95508166381526944}
+  isIdle: 1
+  ignoreDirection: 0
+  _firstPersonTransform: {fileID: 4638582545893354}
 --- !u!114 &114460167738078974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -549,17 +570,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86183848d06f6234f8cd0f6d605c317a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yawTransform: {fileID: 4664594453839338}
-  pitchTransform: {fileID: 4495788710916246}
-  rotateSpeed: 90
-  elevationRange: 85
-  weapon: {fileID: 1363995658160660}
-  animator: {fileID: 95508166381526944}
-  isIdle: 1
-  ignoreDirection: 0
-  _firstPersonTransform: {fileID: 4638582545893354}
   target: {fileID: 0}
+  turret: {fileID: 114086969497487688}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 2048
   range: 50
+  cost: 0

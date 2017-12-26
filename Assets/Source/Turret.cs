@@ -44,6 +44,10 @@ public class Turret : MonoBehaviour, IAimable, ILinkable, ISupportsFirstPerson {
 
     public virtual void FixedUpdate() {
         // Theres some heavy mathematics going on here, stuff I *technically* know, but am not particularily good at.
+        RotateTurret (TargetPosition);
+    }
+
+    public virtual void RotateTurret (Vector3 towards) {
         if (!isIdle) {
             Vector3 transformedPos = yawTransform.InverseTransformPoint (TargetPosition);
 

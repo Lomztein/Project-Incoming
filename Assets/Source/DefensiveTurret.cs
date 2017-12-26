@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefensiveTurret : Turret, IPlaceable, ISellable {
+[RequireComponent (typeof (Turret))]
+public class DefensiveTurret : MonoBehaviour, IPlaceable, ISellable {
 
     public static List<DefensiveTurret> allDefensiveTurrets = new List<DefensiveTurret> ();
     public static int defensiveTurretCapacity = 2;
@@ -10,6 +11,7 @@ public class DefensiveTurret : Turret, IPlaceable, ISellable {
 
     public TargetFinder targetFinder = new TargetFinder ();
     public Transform target;
+    public Turret turret;
 
     public LayerMask targetLayerMask;
     public float range;
@@ -51,15 +53,14 @@ public class DefensiveTurret : Turret, IPlaceable, ISellable {
     }
 
     // Update is called once per frame
-    new void FixedUpdate () {
-        base.FixedUpdate ();
+    void FixedUpdate () {
 
         if (!target) {
             target = targetFinder.FindTarget (transform.position, range, targetLayerMask);
-            SetIdle ();
+            turret.SetIdle ();
         } else {
-            Aim (target.position);
-            Fire ();
+            turret.Aim (target.position);
+            turret.Fire ();
 
             if (Vector3.Distance (transform.position, target.position) > range)
                 target = null;

@@ -22,6 +22,11 @@ public class Wall : MonoBehaviour, IHasHealthbar {
     }
 
     public void BuildWall() {
+        foreach (WallPiece piece in pieces)
+            if (piece)
+                Destroy (piece.gameObject);
+        pieces = new List<WallPiece> ();
+
         Vector3 direction = transform.right;
         for (int i = -segmentAmount; i <= segmentAmount; i++) {
             GameObject newSegment = Instantiate (wallPrefab, transform.position + direction * segmentLength * i, transform.rotation);
@@ -42,7 +47,11 @@ public class Wall : MonoBehaviour, IHasHealthbar {
         return total;
     }
 
+    public float GetTotalMaxHealth () {
+        return wall.pieces.Count * wall.pieces [ 0 ].maxHealth;
+    }
+
     public float GetHealthPercentage() {
-        return GetTotalHealth () / (wall.pieces [ 0 ].maxHealth * wall.pieces.Count);
+        return GetTotalHealth () / (GetTotalMaxHealth ());
     }
 }
