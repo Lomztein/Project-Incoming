@@ -167,7 +167,7 @@ MonoBehaviour:
     type: 2}
   hittableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!198 &198939885705619842
 ParticleSystem:
   m_ObjectHideFlags: 1

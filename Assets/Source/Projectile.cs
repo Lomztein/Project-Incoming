@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour, IFireable {
         for (int i = 0; i < amount; i++) {
             GameObject newBullet = Instantiate (gameObject, muzzle.position, Quaternion.identity);
             Projectile projectile = newBullet.GetComponent<Projectile> ();
-            projectile.hittableLayer += firingWeapon.hittableLayer;
+            projectile.hittableLayer |= firingWeapon.hittableLayer;
 
             float rad = inaccuracy * Mathf.Deg2Rad;
 

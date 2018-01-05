@@ -89,6 +89,8 @@ public abstract class Vehicle : MonoBehaviour, IDamageable, IComparable<Weapon>,
             Destroy (gameObject);
 
             Destroy (healthbar.gameObject);
+
+            SendMessage ("OnExplode", SendMessageOptions.DontRequireReceiver);
         }
     }
 

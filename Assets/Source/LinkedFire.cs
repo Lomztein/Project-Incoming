@@ -17,6 +17,11 @@ public class LinkedFire {
     }
 
     public static void Link(params ILinkable[] newLinkables) {
+        foreach (ILinkable linkable in newLinkables) {
+            if (linkable.Link != null)
+                linkable.Link.Destroy ();
+        }
+
         LinkedFire newLink = new LinkedFire ();
         foreach (ILinkable linkable in newLinkables) {
             newLink.AddLinkable (linkable);
@@ -25,10 +30,12 @@ public class LinkedFire {
     }
 
     public void AddLinkable(ILinkable newLinkable) {
-        newLinkable.Link = this;
-        linkables.Add (newLinkable);
-        linkedFireRate = newLinkable.GetFirerate () / linkables.Count;
-        newLinkable.Weapon.Reload ();
+        if (newLinkable.CanLink ()) {
+            newLinkable.Link = this;
+            linkables.Add (newLinkable);
+            linkedFireRate = newLinkable.GetFirerate () / linkables.Count;
+            newLinkable.Weapon.Reload ();
+        }
     }
 
     public void RemoveLinkable (ILinkable linkable) {
@@ -36,10 +43,17 @@ public class LinkedFire {
         linkedFireRate = linkable.GetFirerate () / linkables.Count;
     }
 
-    public void ClearLinkable (ILinkable linkable) {
+    public static void ClearLinkable (ILinkable linkable) {
         if (linkable.Link != null)
             linkable.Link.RemoveLinkable (linkable);
         linkable.Link = null;
+    }
+
+    public void Destroy () {
+        List<ILinkable> toRemove = new List<ILinkable> (linkables);
+        foreach (ILinkable linkable in toRemove) {
+            ClearLinkable (linkable);
+        }
     }
 
     public bool Fire() {

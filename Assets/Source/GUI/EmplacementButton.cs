@@ -26,7 +26,7 @@ public class EmplacementButton : PurchaseButton {
             OpenEmplacementMenu (emplacement);
         } else {
             EmplacementTurret turret = emplacement.turretPrefab.GetComponent<EmplacementTurret> ();
-            if (PlayerInput.TryUseCredits (turret.cost)) {
+            if (PlayerInput.TryUseCredits (turret.Cost)) {
                 emplacement.BuildTurret ();
                 menu.Open ();
             }

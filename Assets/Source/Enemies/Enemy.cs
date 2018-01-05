@@ -67,6 +67,10 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    void OnExplode () {
+        PlayerInput.GiveCredits (value);
+    }
+
     public bool Fire() {
         if (controllable as Object)
             return controllable.Fire ();

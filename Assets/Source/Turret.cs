@@ -17,6 +17,7 @@ public class Turret : MonoBehaviour, IAimable, ILinkable, ISupportsFirstPerson {
 
     public bool isIdle = true;
     public bool ignoreDirection;
+    public bool canLink = true;
 
     public Vector3 TargetPosition {
         get { return _targetPosition; }
@@ -120,5 +121,9 @@ public class Turret : MonoBehaviour, IAimable, ILinkable, ISupportsFirstPerson {
 
     public void OnFire() {
         PlayFireAnimation ();
+    }
+
+    public bool CanLink() {
+        return canLink;
     }
 }

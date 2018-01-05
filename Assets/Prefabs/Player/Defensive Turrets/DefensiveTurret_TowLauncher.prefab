@@ -547,4 +547,5 @@ MonoBehaviour:
   animator: {fileID: 95231144519361216}
   isIdle: 1
   ignoreDirection: 0
+  canLink: 1
   _firstPersonTransform: {fileID: 4861296012813654}

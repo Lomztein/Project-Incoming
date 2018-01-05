@@ -10,6 +10,8 @@
         set;
     }
 
+    bool CanLink();
+
     void OnFire();
 
     float GetFirerate();

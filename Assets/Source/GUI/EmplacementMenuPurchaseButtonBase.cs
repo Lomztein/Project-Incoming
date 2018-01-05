@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class EmplacementMenuPurchaseButtonBase : PurchaseButton {
 
     public EmplacementMenuGUI parentGUI;
-    public bool purchased;
 
     public abstract bool IsCurrentItem();
+    public abstract bool IsPurchased();
 
 }

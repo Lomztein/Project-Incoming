@@ -533,8 +533,11 @@ MonoBehaviour:
   animator: {fileID: 95967530595572050}
   isIdle: 1
   ignoreDirection: 1
+  canLink: 1
   _firstPersonTransform: {fileID: 4647731961536666}
   cost: 1000
+  turretName: Basic Cannon
+  desc: Mechically simple and quite powerful.
   possibleProjectiles:
   - {fileID: 1608416371570562, guid: eac9376a37cd89f4dad7d2df3c9fc3ff, type: 2}
   - {fileID: 1608416371570562, guid: 0aa259ce57b925d418788f9b45ffe0d3, type: 2}

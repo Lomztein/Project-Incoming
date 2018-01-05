@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class EmplacementMenuGUI : GUIWindowBase {
 
@@ -21,6 +22,9 @@ public class EmplacementMenuGUI : GUIWindowBase {
 
     public GameObject [ ] purchaseableTurrets;
     public GameObject [ ] projectileOptions;
+
+    public Dictionary<string, bool> purchasedTurrets = new Dictionary<string, bool> ();
+    public Dictionary<string, bool> purchasedAmmo = new Dictionary<string, bool> ();
 
     public override void Open() {
         gameObject.SetActive (true);
@@ -52,13 +56,14 @@ public class EmplacementMenuGUI : GUIWindowBase {
         foreach (GameObject obj in purchaseableTurrets) {
             GameObject newButton = Instantiate (turretButtonPrefab, turretButtonParent);
             EmplacementTurretPurchaseButton butt = newButton.GetComponent<EmplacementTurretPurchaseButton> ();
+            butt.turretPrefab = obj.GetComponent<EmplacementTurret> ();
 
             FeedButtonData (butt, obj);
             butt.cost = obj.GetComponent<EmplacementTurret> ().cost;
 
             if (butt.obj == emplacement.turretPrefab) {
                 currentTurretButton = butt;
-                butt.purchased = true;
+                SetTurretPurchased (butt.turretPrefab.Name);
             }
         }
     }
@@ -73,6 +78,7 @@ public class EmplacementMenuGUI : GUIWindowBase {
 
             if (butt.obj == emplacement.GetProjectilePrefab ()) {
                 currentProjectileButton = butt;
+                SetProjectilePurchased (butt.obj.name);
             }
         }
     }
@@ -89,15 +95,41 @@ public class EmplacementMenuGUI : GUIWindowBase {
     }
 
     public void OnSelectTurret (EmplacementTurretPurchaseButton fromButton) {
+        SetTurretPurchased (fromButton.turretPrefab.Name);
         emplacement.ChangeTurret (fromButton.obj);
         currentTurretButton = fromButton;
         RebuildButtons ();
     }
 
     public void OnSelectProjectile (EmplacementProjectileSelectButton fromButton) {
+        SetProjectilePurchased (fromButton.obj.name);
         emplacement.ChangeProjectile (fromButton.obj);
         currentProjectileButton = fromButton;
         UpdateAll ();
+    }
+
+    public void SetProjectilePurchased (string name) {
+        if (!purchasedAmmo.ContainsKey (name))
+            purchasedAmmo.Add (name, true);
+    }
+
+    public void SetTurretPurchased (string name) {
+        if (!purchasedTurrets.ContainsKey (name))
+            purchasedTurrets.Add (name, true);
+    }
+
+    public bool IsTurretPurchased (string turretName) {
+        return IsPurchased (purchasedTurrets, turretName);
+    }
+
+    public bool IsProjectilePurchased(string projName) {
+        return IsPurchased (purchasedAmmo, projName);
+    }
+
+    private bool IsPurchased(Dictionary<string, bool> dict, string entry) {
+        if (!dict.ContainsKey (entry))
+            return false;
+        return dict[ entry];
     }
 
     private void UpdateAll() {

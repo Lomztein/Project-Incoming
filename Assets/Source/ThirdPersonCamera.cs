@@ -12,6 +12,9 @@ public class ThirdPersonCamera : MonoBehaviour {
     private float forwardDir;
     private float sideDir;
 
+    private float xRot;
+    private float yRot;
+
     private void Start() {
         _controllable = controlledObject.GetComponent<IControllable> ();
     }
@@ -29,8 +32,12 @@ public class ThirdPersonCamera : MonoBehaviour {
         forwardDir = Input.GetAxis ("Vertical");
         sideDir = Input.GetAxis ("Horizontal");
 
-        transform.Rotate (new Vector3 (Input.GetAxis ("Mouse Y"), Input.GetAxis ("Mouse X")) * sensitivity * Time.deltaTime * -1f);
-        transform.position = Vector3.Lerp (transform.position, controlledObject.transform.position, sensitivity * Time.deltaTime);
+        transform.position = Vector3.Lerp (transform.position, controlledObject.transform.position, 20f * Time.deltaTime);
+
+        xRot += Input.GetAxis ("Mouse X");
+        yRot += Input.GetAxis ("Mouse Y");
+
+        transform.rotation = Quaternion.Euler (new Vector3 (yRot * -1f, xRot, 0f) * sensitivity);
     }
 
     private void FixedUpdate() {

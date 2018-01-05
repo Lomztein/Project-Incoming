@@ -187,5 +187,5 @@ MonoBehaviour:
     type: 2}
   hittableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   bounceCount: 3

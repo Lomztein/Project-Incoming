@@ -998,6 +998,7 @@ MonoBehaviour:
   animator: {fileID: 95828129727677468}
   isIdle: 1
   ignoreDirection: 0
+  canLink: 1
   _firstPersonTransform: {fileID: 4751601540669270}
 --- !u!114 &114860195263761328
 MonoBehaviour:
@@ -1018,7 +1019,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!114 &114897993380889428
 MonoBehaviour:
   m_ObjectHideFlags: 1

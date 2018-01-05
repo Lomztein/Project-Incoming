@@ -690,8 +690,12 @@ MonoBehaviour:
   animator: {fileID: 95858192145376828}
   isIdle: 1
   ignoreDirection: 1
+  canLink: 0
   _firstPersonTransform: {fileID: 4874493335608112}
   cost: 2000
+  turretName: Gatling Cannon
+  desc: There is a saying that says that two barrels are better than one. If that
+    is true, then 6 must be even better.
   possibleProjectiles:
   - {fileID: 1608416371570562, guid: 78ede84e2c7c0b7458962d48defedead, type: 2}
   - {fileID: 1608416371570562, guid: c409e641bfb55e943bc371cf8517652a, type: 2}

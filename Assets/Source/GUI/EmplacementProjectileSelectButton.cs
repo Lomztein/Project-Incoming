@@ -16,4 +16,8 @@ public class EmplacementProjectileSelectButton : EmplacementMenuPurchaseButtonBa
     public override bool IsCurrentItem() {
         return parentGUI.currentProjectileButton == this;
     }
+
+    public override bool IsPurchased() {
+        return parentGUI.IsProjectilePurchased (obj.name);
+    }
 }

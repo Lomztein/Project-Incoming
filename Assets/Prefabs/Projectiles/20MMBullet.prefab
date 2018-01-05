@@ -94,7 +94,7 @@ MonoBehaviour:
     type: 2}
   hittableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!120 &120981292407877286
 LineRenderer:
   m_ObjectHideFlags: 1

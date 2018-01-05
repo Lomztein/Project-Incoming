@@ -20,7 +20,7 @@ public class BaseHealth : MonoBehaviour, IHasHealthbar {
     }
 
     void OnTriggerEnter(Collider other) {
-        Enemy enemy = other.GetComponentInParent<Enemy> ();
+        Enemy enemy = other.transform.root.GetComponent<Enemy> ();
         if (enemy) {
             Damage (new Damage (enemy.value, 0f));
             Destroy (enemy.gameObject);
